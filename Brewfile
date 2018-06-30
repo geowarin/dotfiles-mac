@@ -1,0 +1,20 @@
+tap "tldr-pages/tldr"
+
+brew "git"
+brew "cloc"
+brew "curl"
+brew "fzf"
+brew "hub"
+brew "node"
+brew "tldr"
+brew "wifi-password"
+brew "zsh"
+brew "yadm"
+brew "ripgrep"
+
+#install "brew-cask"
+tap "phinze/cask"
+
+cask "freesmug-chromium"
+cask "qlmarkdown"
+cask "qlstephen"
