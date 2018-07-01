@@ -6,10 +6,9 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/projects"
+alias d="cd ~/dev"
 alias g="git"
 alias h="history"
 alias j="jobs"
@@ -124,3 +123,16 @@ alias rebrew-clean="brew bundle cleanup --file=$XDG_CONFIG_HOME/brew/Brewfile"
 alias rebrew="brew bundle install --file=$XDG_CONFIG_HOME/brew/Brewfile"
 
 alias cdtmp='cd `mktemp -d /tmp/frantic-XXXXXX`'
+
+# suffix aliases
+
+# starts one or multiple args as programs in background
+background() {
+  for ((i=2;i<=$#;i++)); do
+    ${@[1]} ${@[$i]} &> /dev/null &
+  done
+}
+
+alias -s html='background chromium'
+alias -s {mp4,MP4,mov,MOV}='background vlc'
+alias -s {zip,ZIP}="unzip -l"
