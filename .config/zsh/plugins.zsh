@@ -17,6 +17,9 @@ zplug "zsh-users/zsh-history-substring-search"
 
 zplug "plugins/sublime", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
+zplug "hcgraf/zsh-sudo"
+zplug "Seinh/git-prune"
+zplug 'wfxr/forgit', defer:1
 
 # Prompt
 zplug "sindresorhus/pure"

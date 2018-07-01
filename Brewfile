@@ -12,6 +12,7 @@ brew "zsh"
 brew "yadm"
 brew "ripgrep"
 brew "zplug"
+brew "diff-so-fancy"
 
 #install "brew-cask"
 tap "phinze/cask"
