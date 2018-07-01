@@ -136,3 +136,7 @@ background() {
 alias -s html='background chromium'
 alias -s {mp4,MP4,mov,MOV}='background vlc'
 alias -s {zip,ZIP}="unzip -l"
+
+if command -v hub >/dev/null 2>&1; then
+	alias git="hub"
+fi

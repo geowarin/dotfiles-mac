@@ -19,4 +19,5 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 _Z_DATA="$XDG_DATA_HOME"/z/data
+# for intellij:  https://intellij-support.jetbrains.com/hc/en-us/community/posts/206845865--yjp-directory-any-value-at-all-
 YOURKIT_HOME="$XDG_DATA_HOME"/yjp
