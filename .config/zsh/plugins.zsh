@@ -20,6 +20,7 @@ zplug "lib/key-bindings", from:oh-my-zsh
 zplug "hcgraf/zsh-sudo"
 zplug "Seinh/git-prune"
 zplug 'wfxr/forgit', defer:1
+zplug "MichaelAquilina/zsh-you-should-use"
 
 # Prompt
 zplug "sindresorhus/pure"

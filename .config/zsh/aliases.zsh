@@ -119,3 +119,6 @@ alias more='less'
 
 alias cdtmp='cd `mktemp -d /tmp/frantic-XXXXXX`'
 alias zconf="st $XDG_CONFIG_HOME"
+
+alias rebrew-clean="brew bundle cleanup --file=$XDG_CONFIG_HOME/brew/Brewfile"
+alias rebrew="brew bundle install --file=$XDG_CONFIG_HOME/brew/Brewfile"
