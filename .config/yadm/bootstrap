@@ -4,10 +4,6 @@
 # be run from within $HOME (assuming this is the root of your dotfiles)
 cd "$HOME"
 
-echo "Init submodules"
-yadm submodule update --recursive --init
-
-
 # Brew
 system_type=$(uname -s)
 
@@ -25,3 +21,6 @@ if [ "$system_type" = "Darwin" ]; then
   fi
 
 fi
+
+echo "Changing default shell: zsh"
+chsh -s zsh
