@@ -11,6 +11,7 @@ brew "wifi-password"
 brew "zsh"
 brew "yadm"
 brew "ripgrep"
+brew "zplug"
 
 #install "brew-cask"
 tap "phinze/cask"

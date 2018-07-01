@@ -13,3 +13,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # Alias respecting programs
 alias mvm="mvn -gs "$XDG_CONFIG_HOME"/maven/settings.xml"
 alias yadm="yadm -Y $YADM_HOME --yadm-repo $YADM_DATA/repo.git"
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
