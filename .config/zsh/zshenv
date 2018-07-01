@@ -17,3 +17,5 @@ alias yadm="yadm -Y $YADM_HOME --yadm-repo $YADM_DATA/repo.git"
 HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000
+
+_Z_DATA="$XDG_DATA_HOME"/z/data

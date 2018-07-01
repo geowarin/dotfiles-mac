@@ -18,8 +18,12 @@ if [ "$system_type" = "Darwin" ]; then
 
 fi
 
-echo "Changing default shell: zsh"
-chsh -s zsh
+
+test "$(expr "$SHELL" : '.*/\(.*\)')" != "zsh" &&
+	which chsh >/dev/null 2>&1 &&
+	chsh -s "zsh" &&
+	echo "set zsh as default shell"
 
 # For the history to be stored correctly
 mkdir -p "$HOME/.local/share/zsh"
+mkdir -p "$HOME/.local/share/z"
