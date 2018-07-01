@@ -27,3 +27,7 @@ test "$(expr "$SHELL" : '.*/\(.*\)')" != "zsh" &&
 # For the history to be stored correctly
 mkdir -p "$HOME/.local/share/zsh"
 mkdir -p "$HOME/.local/share/z"
+
+# iterm
+defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
+defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true

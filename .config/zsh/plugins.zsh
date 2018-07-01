@@ -35,3 +35,5 @@ if ! zplug check; then
 fi
 
 zplug load
+
+#export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=red'
