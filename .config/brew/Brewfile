@@ -1,6 +1,6 @@
-tap "tldr-pages/tldr"
+tap "homebrew/bundle"
 tap "homebrew/cask"
-
+tap "homebrew/core"
 brew "bash"
 brew "cloc"
 brew "curl"
@@ -16,8 +16,7 @@ brew "yadm"
 brew "yarn"
 brew "zplug"
 brew "zsh"
-
-cask "iterm2"
 cask "freesmug-chromium"
+cask "iterm2"
 cask "qlmarkdown"
 cask "qlstephen"
