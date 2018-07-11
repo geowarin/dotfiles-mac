@@ -9,6 +9,7 @@ alias -- -="cd -"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias d="cd ~/dev"
+alias pr="cd ~/dev/pull-requests"
 alias g="git"
 alias h="history"
 alias j="jobs"
@@ -117,14 +118,15 @@ alias more='less'
 # Use "highlight" in place of "cat"
 #alias cat="highlight $1 --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
 
-alias cdtmp='cd `mktemp -d /tmp/frantic-XXXXXX`'
+alias cdtmp='cd `mktemp -d /tmp/dev-XXXXXX`'
 alias zconf="st $XDG_CONFIG_HOME"
 
+# Workflow
+# clean packages not in Brewfile: bb clean --force
+# Update Brewfile from current packages: bb dump --force
 alias bb="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
 alias bd="brew bundle dump --file=-"
-alias bdiff="diff -wy <(cat .config/brew/Brewfile) <(bd) "
-
-alias cdtmp='cd `mktemp -d /tmp/frantic-XXXXXX`'
+alias bdiff="diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(bd)"
 
 # Download subtitles for all the videos in the current directory
 alias subtitles="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
