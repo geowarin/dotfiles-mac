@@ -40,6 +40,7 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias diff='colordiff'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -121,8 +122,12 @@ alias zconf="st $XDG_CONFIG_HOME"
 
 alias bb="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
 alias bd="brew bundle dump --file=-"
+alias bdiff="diff -wy <(cat .config/brew/Brewfile) <(bd) "
 
 alias cdtmp='cd `mktemp -d /tmp/frantic-XXXXXX`'
+
+# Download subtitles for all the videos in the current directory
+alias subtitles="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
 
 # suffix aliases
 
