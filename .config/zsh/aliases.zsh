@@ -128,6 +128,7 @@ alias zconf="st $XDG_CONFIG_HOME"
 alias bb="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
 alias bd="brew bundle dump --file=-"
 alias bdiff="diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(bd)"
+alias bup="brew update && bb install && brew cleanup"
 
 # Download subtitles for all the videos in the current directory
 alias subtitles="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
