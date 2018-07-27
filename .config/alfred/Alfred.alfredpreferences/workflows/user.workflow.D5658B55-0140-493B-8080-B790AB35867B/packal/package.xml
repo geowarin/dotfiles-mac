@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<workflow>
+  <name>Localhost</name>
+  <version>1.1</version>
+  <bundle>com.victorhazbun.localhost</bundle>
+  <updated>1452940574</updated>
+  <file>localhost_1_1.alfredworkflow</file>
+</workflow>

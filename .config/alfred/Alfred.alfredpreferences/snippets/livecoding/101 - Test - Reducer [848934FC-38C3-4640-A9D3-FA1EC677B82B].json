@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import expect from 'expect';\nimport appReducer from 'reducers';\nimport {createStore} from 'redux';\n\ndescribe('Reducer', () => {\n\n  it('should update the store when dispatching', () => {\n\n    const store = createStore(appReducer, {});\n\n    store.dispatch({\n      type: 'SEARCH',\n      payload: 'Avengers'\n    });\n\n    expect(store.getState()).toEqual({ searchTerm: 'Avengers' })\n  });\n});\n",
+    "uid" : "848934FC-38C3-4640-A9D3-FA1EC677B82B",
+    "name" : "101 - Test - Reducer",
+    "keyword" : ""
+  }
+}

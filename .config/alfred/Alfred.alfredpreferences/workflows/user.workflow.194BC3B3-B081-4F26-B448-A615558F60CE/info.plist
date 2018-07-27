@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>jvdmeulen_imessages</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>23B6ABB4-173A-4465-B138-C375C4D0EED2</key>
+		<array/>
+		<key>A29474FC-452A-4A51-A814-00EB9A8FC5D7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>23B6ABB4-173A-4465-B138-C375C4D0EED2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Jasper van der Meulen</string>
+	<key>description</key>
+	<string>Focus iMessages by typing part of the name/handle</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>iMessages</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>keyword</key>
+				<string>im</string>
+				<key>runningsubtext</key>
+				<string>Starting Messages.app … please wait</string>
+				<key>script</key>
+				<string>tell application "Messages"
+services is "Gmail"
+	set t to the buddies whose name contains "{query}" or handle  contains "{query}" or full name contains "{query}"
+	set out to "&lt;?xml version=\"1.0\"?&gt;\n\t&lt;items&gt;\n"
+	repeat with username in t
+		if status of username is "offline" then
+			set statusmessage to  " ( " &amp; handle of username &amp; " ) Offline"
+		else
+			set statusmessage to " ( " &amp; handle of username &amp; " ) " &amp; status of username
+		end if
+		if name of services of username is "Gmail" then
+			set icon to "&lt;icon&gt;gtalk.png&lt;/icon&gt;"
+		else
+			set icon to "&lt;icon&gt;icon.png&lt;/icon&gt;"
+		end if
+		set out to out &amp; "\t\t&lt;item uid=\"" &amp; id of username &amp; "\" arg=\"" &amp; id of username &amp; "\"&gt;&lt;title&gt;" &amp; name of username &amp; "&lt;/title&gt;&lt;subtitle&gt;" &amp; statusmessage &amp; "&lt;/subtitle&gt;" &amp; icon &amp; "&lt;/item&gt;\n"
+	end repeat
+	set out to out &amp; "\t&lt;/items&gt;"
+end tell</string>
+				<key>subtext</key>
+				<string>Type part of the name/handle</string>
+				<key>title</key>
+				<string>Send a message to</string>
+				<key>type</key>
+				<integer>6</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A29474FC-452A-4A51-A814-00EB9A8FC5D7</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>63</integer>
+				<key>script</key>
+				<string>tell application "Messages"	activate	send "" to item 1 of (buddies whose id is "{query}")end tell</string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>23B6ABB4-173A-4465-B138-C375C4D0EED2</string>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Version 0.01</string>
+	<key>uidata</key>
+	<dict>
+		<key>23B6ABB4-173A-4465-B138-C375C4D0EED2</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>A29474FC-452A-4A51-A814-00EB9A8FC5D7</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

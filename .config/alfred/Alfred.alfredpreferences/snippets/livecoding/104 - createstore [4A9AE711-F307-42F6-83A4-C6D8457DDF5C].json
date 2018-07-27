@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import { Provider } from 'react-redux';\n\nimport { createStore } from 'redux';\nimport appReducer from 'reducers';\n\nconst initialState = {\n  movies,\n  searchTerm: ''\n};\n\nconst store = createStore(appReducer, initialState, window.devToolsExtension());\n\nrender(\n  <Provider store={store}>\n    <App\/>\n  <\/Provider>, document.getElementById('app')\n);\n",
+    "uid" : "4A9AE711-F307-42F6-83A4-C6D8457DDF5C",
+    "name" : "104 - createstore",
+    "keyword" : ""
+  }
+}

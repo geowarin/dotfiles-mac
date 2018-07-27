@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "case 'SEARCH':\n  return { ...state, searchTerm: action.payload };",
+    "uid" : "972FAD12-912A-4058-915E-F6ED737A213E",
+    "name" : "103 - Reducer - Search",
+    "keyword" : ""
+  }
+}

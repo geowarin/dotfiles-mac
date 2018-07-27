@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "const MovieItem = props => (\n  <Col xs={3}>\n    <Thumbnail className=\"item\" src={`https:\/\/image.tmdb.org\/t\/p\/w396${props.movie.poster_path}`} alt=\"242x200\"> \n      <h3>{props.movie.title}<\/h3> \n    <\/Thumbnail>\n  <\/Col>\n);",
+    "uid" : "1E69C8AC-68A9-4EA9-BF0F-66B5FEFA52B6",
+    "name" : "05-MovieItem",
+    "keyword" : ""
+  }
+}

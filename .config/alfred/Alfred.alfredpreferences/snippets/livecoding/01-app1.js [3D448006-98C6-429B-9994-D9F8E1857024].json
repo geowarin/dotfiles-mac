@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import React, {Component} from \"react\";\nimport {Grid, Col} from \"react-bootstrap\";\n\nimport SearchForm from '.\/SearchForm';\nimport MovieList from '.\/MovieList';\n\nexport default class App extends Component {\n\n  render () {\n    return (\n      <Grid fluid>\n        <Col className=\"sidebar\">\n          <SearchForm \/>\n        <\/Col>\n        <Col className=\"content\">\n          <MovieList \/>\n        <\/Col>\n      <\/Grid>\n    )\n  }\n}\n",
+    "uid" : "3D448006-98C6-429B-9994-D9F8E1857024",
+    "name" : "01-app1.js",
+    "keyword" : ""
+  }
+}

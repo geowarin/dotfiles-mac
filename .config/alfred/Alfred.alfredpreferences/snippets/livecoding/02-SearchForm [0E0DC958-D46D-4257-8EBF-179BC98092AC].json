@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import React from 'react';\nimport {FormControl} from \"react-bootstrap\";\n\nexport default class SearchForm extends React.Component {\n  state = {\n    value: ''\n  };\n\n  handleChange = (event) => {\n    this.setState({\n      value: event.target.value\n    });\n  };\n\n  handleSubmit = (event) => {\n    event.preventDefault();\n    this.props.search(this.state.value);\n  };\n\n  render() {\n    return (\n      <form onSubmit={this.handleSubmit}>\n        <FormControl type=\"text\"\n                     placeholder=\"Search\"\n                     onChange={this.handleChange}\/>\n      <\/form>\n    );\n  }\n}",
+    "uid" : "0E0DC958-D46D-4257-8EBF-179BC98092AC",
+    "name" : "02-SearchForm",
+    "keyword" : ""
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "$color: #242934;\n\nbody {\n  background-color: $color;\n}\n\n.sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  width: 300px;\n  padding: 10px;\n}\n\n.content {\n  position: absolute;\n  top: 0;\n  left: 300px;\n  bottom: 0;\n  right: 0;\n  padding: 10px;\n  overflow: scroll;\n}\n\n.item {\n  height: 40em;\n  overflow: hidden;\n}\n\nh3 {\n  display: inline-block;\n  width: 100%;\n  overflow: hidden;\n  line-height: 1.5em;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n",
+    "uid" : "C7A5ECF3-0381-4845-8DB6-43E26FF5A80F",
+    "name" : "04-main.scss",
+    "keyword" : "sass"
+  }
+}

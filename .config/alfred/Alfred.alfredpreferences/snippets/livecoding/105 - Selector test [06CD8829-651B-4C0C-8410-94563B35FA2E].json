@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import expect from 'expect';\nimport moviesBySearchTerm from 'selectors';\n\ndescribe('Selectors', () => {\n\n  it('should return filtered movies', () => {\n\n    const movies = [\n      {title: 'Batman'},\n      {title: 'Avengers'}\n    ];\n\n    const searchTerm = 'Bat';\n\n    const filteredMovies = moviesBySearchTerm({ movies, searchTerm });\n\n    expect(filteredMovies).toEqual([\n      {title: 'Batman'}\n    ]);\n\n  });\n});\n",
+    "uid" : "06CD8829-651B-4C0C-8410-94563B35FA2E",
+    "name" : "105 - Selector test",
+    "keyword" : ""
+  }
+}

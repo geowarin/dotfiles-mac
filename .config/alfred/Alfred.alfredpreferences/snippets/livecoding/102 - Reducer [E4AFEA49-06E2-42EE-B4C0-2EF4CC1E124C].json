@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "export default (state = {}, action) => {\n  switch (action.type) {\n    default:\n      return state;\n  }\n}",
+    "uid" : "E4AFEA49-06E2-42EE-B4C0-2EF4CC1E124C",
+    "name" : "102 - Reducer",
+    "keyword" : ""
+  }
+}

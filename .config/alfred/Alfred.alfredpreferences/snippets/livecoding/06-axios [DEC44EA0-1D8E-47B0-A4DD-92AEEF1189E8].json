@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import axios from 'axios';\n\naxios\n  .get('https:\/\/api.themoviedb.org\/3\/discover\/movie?api_key=61a7fe0a2defc2d41f21253258bf6a4e')\n  .then(response => response.data.results)\n  .then(movies => {\n      \n      render(<App movies={movies} \/>, document.getElementById('app'));\n    \n  });",
+    "uid" : "DEC44EA0-1D8E-47B0-A4DD-92AEEF1189E8",
+    "name" : "06-axios",
+    "keyword" : ""
+  }
+}

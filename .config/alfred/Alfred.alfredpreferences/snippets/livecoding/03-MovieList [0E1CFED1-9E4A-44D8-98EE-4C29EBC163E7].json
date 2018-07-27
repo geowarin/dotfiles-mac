@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "import React from 'react';\nimport {Grid, Row, Col, Thumbnail} from \"react-bootstrap\";\n\nconst MovieList = (props) => (\n  <Grid fluid>\n    <Row>\n    <\/Row>\n  <\/Grid>\n);\n\nexport default MovieList;",
+    "uid" : "0E1CFED1-9E4A-44D8-98EE-4C29EBC163E7",
+    "name" : "03-MovieList",
+    "keyword" : ""
+  }
+}
