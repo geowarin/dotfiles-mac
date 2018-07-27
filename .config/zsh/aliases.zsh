@@ -124,6 +124,7 @@ alias zconf="st $XDG_CONFIG_HOME"
 # Workflow
 # clean packages not in Brewfile: bb clean --force
 # Update Brewfile from current packages: bb dump --force
+# Update deps: brew update && bb install
 alias bb="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
 alias bd="brew bundle dump --file=-"
 alias bdiff="diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(bd)"

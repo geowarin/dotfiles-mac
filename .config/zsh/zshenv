@@ -1,15 +1,21 @@
-# XDG directories
+# XDG directories - https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+
+# base directory relative to which user-specific configuration files should be written
 export XDG_CONFIG_HOME=$HOME/.config
+# base directory relative to which user-specific data files should be written
 export XDG_DATA_HOME=$HOME/.local/share
-export XDG_BIN_HOME=$HOME/.local/bin
-export XDG_LIB_HOME=$HOME/.local/lib
+#export XDG_BIN_HOME=$HOME/.local/bin
+#export XDG_LIB_HOME=$HOME/.local/lib
+# base directory relative to which user-specific non-essential (cached) data should be written
 export XDG_CACHE_HOME=$HOME/.cache
+# defines the base directory relative to which user-specific non-essential runtime files and other file objects (such as sockets, named pipes, ...)
 export XDG_RUNTIME_DIR=/tmp
 
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export YADM_HOME="$XDG_CONFIG_HOME/yadm"
 export YADM_DATA="$XDG_DATA_HOME/yadm"
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+# export M2_HOME="$XDG_CONFIG_HOME"/maven/
 
 # Alias respecting programs
 alias mvm="mvn -gs "$XDG_CONFIG_HOME"/maven/settings.xml"
@@ -22,3 +28,5 @@ SAVEHIST=10000
 _Z_DATA="$XDG_DATA_HOME"/z/data
 # for intellij:  https://intellij-support.jetbrains.com/hc/en-us/community/posts/206845865--yjp-directory-any-value-at-all-
 YOURKIT_HOME="$XDG_DATA_HOME"/yjp
+
+export PATH="$HOME"/bin:$PATH
