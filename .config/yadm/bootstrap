@@ -31,3 +31,5 @@ mkdir -p "$HOME/.local/share/z"
 # iterm
 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
+
+source "$HOME/.config/yamd/bootstrap/macos.sh"
