@@ -24,6 +24,7 @@ zplug 'wfxr/forgit', defer:1
 zplug "MichaelAquilina/zsh-you-should-use"
 
 # Prompt
+zplug mafredri/zsh-async, from:github
 zplug "sindresorhus/pure"
 
 # Syntax highlighting needs to be loaded after compinit

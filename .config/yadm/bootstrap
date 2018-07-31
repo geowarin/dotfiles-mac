@@ -18,11 +18,7 @@ if [ "$system_type" = "Darwin" ]; then
 
 fi
 
-
-test "$(expr "$SHELL" : '.*/\(.*\)')" != "zsh" &&
-	which chsh >/dev/null 2>&1 &&
-	chsh -s "zsh" &&
-	echo "set zsh as default shell"
+sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells" && chsh -s /usr/local/bin/zsh
 
 # For the history to be stored correctly
 mkdir -p "$HOME/.local/share/zsh"
@@ -32,4 +28,4 @@ mkdir -p "$HOME/.local/share/z"
 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 
-source "$HOME/.config/yamd/bootstrap/macos.sh"
+source "$HOME/.config/yadm/macos.sh"

@@ -15,11 +15,13 @@ add the workaround to `/.config/zsh/zshenv` (often an alias or an env variable).
 ## Install
 
 ```
+TMP=`mktemp -d`
+curl -fLo "$TMP/yadm" https://github.com/TheLocehiliosan/yadm/raw/master/yadm && chmod a+x "$TMP/yadm"
 XDG_CONFIG_HOME=$HOME/.config
 XDG_DATA_HOME=$HOME/.local/share
 YADM_HOME="$XDG_CONFIG_HOME/yadm"
 YADM_DATA="$XDG_DATA_HOME/yadm"
-yadm -Y $YADM_HOME --yadm-repo $YADM_DATA/repo.git clone https://github.com/gverilla/dotfiles
+"$TMP/yadm" -Y $YADM_HOME --yadm-repo $YADM_DATA/repo.git clone --bootstrap https://github.com/geowarin/dotfiles
 ```
 
 This will prompt you to run the [boostrap file](https://github.com/geowarin/dotfiles/blob/master/.config/yadm/bootstrap).
