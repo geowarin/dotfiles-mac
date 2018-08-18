@@ -1,7 +1,6 @@
 XDG_CONFIG_HOME=$HOME/.config
 
 source "$XDG_CONFIG_HOME/zsh/zshenv"
-source "$XDG_CONFIG_HOME/zsh/completions.zsh"
 
 source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
 
@@ -9,3 +8,5 @@ source "$XDG_CONFIG_HOME/zsh/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 source "$XDG_CONFIG_HOME/zsh/functions.zsh"
+
+jdk 10

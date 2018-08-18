@@ -70,6 +70,8 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 # OS X has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
+alias sha256sum="shasum -a 256"
+
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
@@ -132,6 +134,8 @@ alias bup="brew update && bb install && brew cleanup"
 
 # Download subtitles for all the videos in the current directory
 alias subtitles="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
+
+alias git-delete-squashed="npx git-delete-squashed"
 
 # suffix aliases
 

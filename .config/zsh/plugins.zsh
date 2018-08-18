@@ -1,13 +1,6 @@
 export ZPLUG_HOME=/usr/local/opt/zplug
 
 source $ZPLUG_HOME/init.zsh
- 
-# zgen oh-my-zsh plugins/github
-# zgen oh-my-zsh plugins/sudo
-# zgen oh-my-zsh plugins/command-not-found
-# zgen oh-my-zsh plugins/sublime
-# zgen oh-my-zsh plugins/npm
-# zgen oh-my-zsh themes/wedisagree
 
 zplug "rupa/z", use:z.sh
 
@@ -16,11 +9,12 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
 
 zplug "lib/key-bindings", from:oh-my-zsh
+zplug "lib/completion", from:oh-my-zsh
 zplug "plugins/sublime", from:oh-my-zsh
 
 zplug "hcgraf/zsh-sudo"
 zplug "Seinh/git-prune"
-zplug 'wfxr/forgit', defer:1
+zplug "wfxr/forgit", defer:1
 zplug "MichaelAquilina/zsh-you-should-use"
 
 # Prompt
