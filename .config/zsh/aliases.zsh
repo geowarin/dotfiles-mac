@@ -123,15 +123,6 @@ alias more='less'
 alias cdtmp='cd `mktemp -d /tmp/dev-XXXXXX`'
 alias zconf="st $XDG_CONFIG_HOME"
 
-# Workflow
-# clean packages not in Brewfile: bb clean --force
-# Update Brewfile from current packages: bb dump --force
-# Update deps: brew update && bb install
-alias bb="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
-alias bd="brew bundle dump --file=-"
-alias bdiff="diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(bd)"
-alias bup="brew update && bb install && brew cleanup"
-
 # Download subtitles for all the videos in the current directory
 alias subtitles="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
 

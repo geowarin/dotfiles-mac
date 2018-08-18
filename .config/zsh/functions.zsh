@@ -51,6 +51,33 @@ function dl-site() {
 	wget --mirror --convert-links --adjust-extension --page-requisites -U Mozilla --no-parent -e robots=off --wait=3 --random-wait --limit-rate=900k --no-check-certificate $@
 }
 
+function bb() {
+	CMD="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
+	case $1 in
+        help)
+            echo "bb diff: diffs currently installed program vd Brewfile"
+            echo "bb update: Update isntalled brew packages"
+            echo "bb commit: Commits all installed brew packages to Brewfile"
+            echo "bb clean: Clean all packages in environment not found in Brewfile"
+            ;;
+        diff)
+            diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(brew bundle dump --file=-)
+            ;;
+        update)
+            brew update && eval "${CMD} install" && brew cleanup
+            ;;
+        commit)
+            eval "${CMD} dump --force"
+            ;;
+        clean)
+            eval "${CMD} clean --force"
+            ;;
+        *)
+            echo "ERROR: unknown parameter \"$1\""
+            ;;
+esac
+}
+
 jdk() {
 	if [ $# -ne 0 ]; then
 		removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
