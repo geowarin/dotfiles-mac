@@ -51,11 +51,12 @@ function dl-site() {
 	wget --mirror --convert-links --adjust-extension --page-requisites -U Mozilla --no-parent -e robots=off --wait=3 --random-wait --limit-rate=900k --no-check-certificate $@
 }
 
+# Helper function to manages brew bundle
 function bb() {
 	CMD="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
 	case $1 in
         help)
-            echo "bb diff: diffs currently installed program vd Brewfile"
+            echo "bb diff: diffs currently installed program vs Brewfile"
             echo "bb update: Update isntalled brew packages"
             echo "bb commit: Commits all installed brew packages to Brewfile"
             echo "bb clean: Clean all packages in environment not found in Brewfile"
@@ -70,12 +71,12 @@ function bb() {
             eval "${CMD} dump --force"
             ;;
         clean)
-            eval "${CMD} clean --force"
+            eval "${CMD} cleanup --force"
             ;;
         *)
             echo "ERROR: unknown parameter \"$1\""
             ;;
-esac
+	esac
 }
 
 jdk() {
