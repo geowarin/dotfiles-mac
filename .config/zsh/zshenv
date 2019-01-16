@@ -29,4 +29,10 @@ _Z_DATA="$XDG_DATA_HOME"/z/data
 # for intellij:  https://intellij-support.jetbrains.com/hc/en-us/community/posts/206845865--yjp-directory-any-value-at-all-
 YOURKIT_HOME="$XDG_DATA_HOME"/yjp
 
-export PATH="$HOME"/bin:$PATH
+export PATH="$HOME"/bin:`npm config get prefix`/bin:$PATH
+
+export LESSOPEN="| $(which highlight) %s --out-format xterm256 --line-numbers --quiet --force --style solarized-dark"
+export LESS=" -R"
+
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X';

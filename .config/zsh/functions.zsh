@@ -62,7 +62,7 @@ function bb() {
             echo "bb clean: Clean all packages in environment not found in Brewfile"
             ;;
         diff)
-            diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(brew bundle dump --file=-)
+            diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(brew bundle dump dump --file=-)
             ;;
         update)
             brew update && eval "${CMD} install" && brew cleanup
