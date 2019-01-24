@@ -124,7 +124,8 @@ alias cdtmp='cd `mktemp -d /tmp/dev-XXXXXX`'
 alias zconf="st $XDG_CONFIG_HOME"
 
 # Download subtitles for all the videos in the current directory
-alias subtitles="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
+# alias subs="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
+alias subs="subliminal --cache-dir ~/.subs download -l en download ."
 
 alias git-delete-squashed="npx git-delete-squashed"
 
@@ -144,3 +145,7 @@ alias -s {zip,ZIP}="unzip -l"
 if command -v hub >/dev/null 2>&1; then
 	alias git="hub"
 fi
+
+alias piblet="ssh pi@piblet.local"
+alias retropie="ssh pi@retropie.local"
+alias osmc="ssh osmc@osmc.local"

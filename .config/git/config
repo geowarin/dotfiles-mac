@@ -32,3 +32,5 @@
 	
 [include]
 path = user
+[core]
+	autocrlf = input

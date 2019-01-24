@@ -18,7 +18,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 # export M2_HOME="$XDG_CONFIG_HOME"/maven/
 
 # Alias respecting programs
-alias mvm="mvn -gs "$XDG_CONFIG_HOME"/maven/settings.xml"
+# alias mvm="mvn -gs "$XDG_CONFIG_HOME"/maven/settings.xml"
 alias yadm="yadm -Y $YADM_HOME --yadm-repo $YADM_DATA/repo.git"
 
 HISTFILE="$XDG_DATA_HOME"/zsh/history
@@ -36,3 +36,10 @@ export LESS=" -R"
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+
+export GRAALVM_HOME="$HOME/dev/tools/graalvm-ce-19.0.0"
+
+export VOLTA_HOME="$HOME/.volta"
+[ -s "$VOLTA_HOME/load.sh" ] && . "$VOLTA_HOME/load.sh"
+
+export PATH="$VOLTA_HOME/bin:$PATH"

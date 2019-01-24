@@ -54,17 +54,24 @@ function dl-site() {
 # Helper function to manages brew bundle
 function bb() {
 	CMD="brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile"
+	RED='\033[0;31m'
+	BLUE='\033[0;34m'
+	NC='\033[0m'
 	case $1 in
         help)
-            echo "bb diff: diffs currently installed program vs Brewfile"
-            echo "bb update: Update isntalled brew packages"
-            echo "bb commit: Commits all installed brew packages to Brewfile"
-            echo "bb clean: Clean all packages in environment not found in Brewfile"
+			printf "Usage :\n\n"
+			printf "${BLUE}bb diff${NC}: diffs currently installed program vs Brewfile\n"
+			printf "${BLUE}bb update${NC}: Update installed brew packages\n"
+			printf "${BLUE}bb commit${NC}: Commits all installed brew packages to Brewfile\n"
+			printf "${BLUE}bb clean${NC}: Clean all packages in environment not found in Brewfile\n"
             ;;
         diff)
             diff -wy <(cat $XDG_CONFIG_HOME/brew/Brewfile) <(brew bundle dump dump --file=-)
             ;;
         update)
+			pushd "$(brew --repo)"
+			git prune && git gc
+			popd
             brew update && eval "${CMD} install" && brew cleanup
             ;;
         commit)
@@ -74,7 +81,8 @@ function bb() {
             eval "${CMD} cleanup --force"
             ;;
         *)
-            echo "ERROR: unknown parameter \"$1\""
+			printf "${RED}ERROR${NC}: unknown parameter ${1}\n\n"
+            bb help
             ;;
 	esac
 }
@@ -94,4 +102,9 @@ jdk() {
 removeFromPath() {
 	export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-	
+
+vlcd() {
+	local FILENAME=$(echo $1 | rev | cut -d"/" -f1 | rev)
+	echo "downloading to /tmp/${FILENAME}.mp4..."
+	vlc -v $1 --sout file/ts:/tmp/${FILENAME}.mp4
+}

@@ -162,6 +162,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>58852D6A-18EC-4719-8B6D-3830DE3EECE7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C59B281E-81B3-45CC-AF44-99A6A66C2087</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>58BA8F4E-3368-453A-9490-DBE7FE60328C</key>
 		<array>
 			<dict>
@@ -180,6 +193,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>102D0B94-B4FC-4450-9B5B-9D76AA0FF12C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>69788964-322B-4148-ADFF-46DD4DB9276E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7D01ACF0-2569-46CE-8A8D-AD9CD3736476</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -266,6 +292,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C594F6CC-98D0-45DF-871B-AACC53E6B44C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2262A79A-ACCC-44CF-9C89-051CB07A0CB4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D049EE1A-03D1-4BDF-8920-EE8667E7365C</key>
 		<array>
 			<dict>
@@ -305,6 +344,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DF86BC53-DFDC-4862-879C-2988E0680511</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C594F6CC-98D0-45DF-871B-AACC53E6B44C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EF20647F-5BE3-4143-A667-40375A6C91F8</key>
 		<array>
 			<dict>
@@ -314,6 +366,29 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FED5E784-7A96-4E70-BA0D-40E4C79B7C98</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>69788964-322B-4148-ADFF-46DD4DB9276E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>58852D6A-18EC-4719-8B6D-3830DE3EECE7</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Remove Bitwarden 2fa mode configuration</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -345,66 +420,62 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Copied totp to clipboard.</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5D0CA291-8861-4216-8985-C0CB13A7A0D2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string>use Env;
+				<string>import sys
+import json
+from subprocess import Popen, PIPE
+import os
 
-@details=({query});
+details = sys.argv[1].replace('"','')
+details = details.splitlines()
+details.pop(0)
 
-if ($details[0] eq 'error-noinstall'){
-`open https://github.com/bitwarden/cli`;
-exit 0;
-} elsif ($details[0] eq 'error-nonefound'){
-exit 1;
-} else {
+my_env = os.environ.copy()
+my_env["PATH"] = "/usr/local/bin:/opt/local/bin:" + my_env["PATH"]
 
-my $bw_exec;
-foreach my $f (qw@bw /usr/local/bin/bw /opt/local/bin/bw /usr/bin/bw@) {
-    $bw_exec = $f
-        if (-x $f);
-}
+def get_bw_exec():
+    bw_exec = ""
+    for f in ['/usr/local/bin/bw', '/opt/local/bin/bw', '/usr/bin/bw']:
+        if os.path.exists(f):
+            bw_exec = f
+    if not bw_exec:
+        print(json.dumps(error_result(type="install")))
+        exit(2)
+    return bw_exec
 
-my $sessionKey =`security find-generic-password -w -s \"alfred-bitwarden-session-key\"`; 
+def getpassword(service):
+    cmd = '/usr/bin/security find-generic-password -w -s {service}'.format(service=service)
+    proc = Popen(cmd.split(), stdout=PIPE)
+    output = proc.stdout.read().decode()
+    if not output:
+        exit(1)
+    return output.strip()
 
-open my $file, '&lt;', $ENV{alfred_workflow_data} . "/running_location.txt"; 
-my $firstLine = &lt;$file&gt;; 
-close $file;
-chomp $myFirstLine;
-
-my $results = qx{export PATH=$PATH:/usr/local/bin &amp;&amp; export BW_SESSION=\"$sessionKey\" &amp;&amp; $bw_exec get totp $details[1]};
-chomp $results;
-print $results;
-}</string>
+if 'error-noinstall' in details[0]:
+    cmd = 'open https://github.com/bitwarden/cli'
+    proc = Popen(cmd.split(), stdout=PIPE)
+    exit(1)
+elif 'error-nonefound' in details[0]:
+    exit(1)
+else:
+    bw_exec = get_bw_exec()
+    session_key = getpassword('alfred-bitwarden-session-key')
+    my_env["BW_SESSION"] = str(session_key)
+    cmd = "{bw_exec} get totp {item}".format(bw_exec=bw_exec, item=details[1])
+    proc = Popen(cmd.split(), env=my_env, stdout=PIPE)
+    output =  proc.stdout.read().decode()
+    sys.stdout.write(output.strip())
+    sys.stdout.flush()</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>4</integer>
+				<integer>3</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -433,28 +504,44 @@ print $results;
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>try	set login_email to do shell script "`perl -e 'use strict; use warnings; my $emailAddress =`security find-generic-password -w -s \"alfred-bitwarden-email-address\"`; chomp $emailAddress; print $emailAddress;'`"on error	display alert "Email address not set" message "It appears that no email address has been set. Please run 'bwsetemail your_email@example.com' and try again." as critical	returnend trytell application "Finder"	set current_path to container of (path to me) as aliasend tellset current_unix_path to POSIX path of current_path--set osascript to current_unix_path &amp; "passwordInput.osascript"set osascript to (system attribute "alfred_preferences") &amp; "/workflows/" &amp; (system attribute "alfred_workflow_uid") &amp; "/passwordInput.osascript"try	do shell script "mkdir \"" &amp; (system attribute "alfred_workflow_data") &amp; "\""end trydo shell script "echo \"" &amp; osascript &amp; "\" &gt; \"" &amp; (system attribute "alfred_workflow_data") &amp; "/running_location.txt\""do shell script "export BW_ASKPASS=\"" &amp; osascript &amp; "\""do shell script "launchctl setenv BW_ASKPASS \"" &amp; osascript &amp; "\""tell application "Finder"	if exists POSIX file "/usr/bin/bw" then		set bw_binary to "/usr/bin/bw"	else if exists POSIX file "/usr/local/bin/bw" then		set bw_binary to "/usr/local/bin/bw"	else if exists POSIX file "/opt/local/bin/bw" then		set bw_binary to "/opt/local/bin/bw"	else		display dialog "Bitwarden binary not found"	end ifend tell--improvement required here, test if we actually HAVE an bw_binary and if not error outif ("{query}" = "scriptlocationnotset") then	display notification "Please wait... the alfred search will be presented once login is complete." with title "Bitwarden Login"end iftry	set output to do shell script "/bin/bash -c 'export PATH=$PATH:/usr/local/bin &amp;&amp; " &amp; "export TERM=\"xterm-256color\" &amp;&amp; export BW_ASKPASS=\"" &amp; osascript &amp; "\" &amp;&amp; " &amp; bw_binary &amp; " login \"" &amp; login_email &amp; "\"  $(" &amp; osascript &amp; " Login Password\\ for\\ " &amp; login_email &amp; ") --raw'"	do shell script "/bin/bash -c 'security add-generic-password -a \"alfred-bitwarden-session-key\" -s \"alfred-bitwarden-session-key\" -w \"" &amp; output &amp; "  \" -C \"note\" -U'"		on error the errorMessage number the errorNumber	if errorMessage contains "Invalid master password." then		display alert "Bitwarden Login" message "You entered an invalid master password for " &amp; login_email &amp; " Error Message: " &amp;errorMessage &amp; ". " as informational
-		error	else		display alert "Bitwarden Login" message "Your account could not be logged in for " &amp; login_email &amp; " Error Message: " &amp; errorMessage &amp; ". " as critical
-		error	end ifend tryif ("{query}" = "scriptlocationnotset") then	display notification "Please wait... the alfred search will be presented once the login is complete." with title "Bitwarden Login"end ifif ("{query}" = "scriptlocationnotset") then	tell application "Alfred 3" to search "bw "end if
-if ("{query}" = "") then	return "Logged in"end if</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>type</key>
-				<integer>6</integer>
+				<key>title</key>
+				<string>Copied totp to clipboard.</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>D21298B3-763D-48F9-A804-C3B06D3B70E7</string>
+			<string>5D0CA291-8861-4216-8985-C0CB13A7A0D2</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:STATUS_MESSAGE_DESC}</string>
+				<key>title</key>
+				<string>{var:STATUS_MESSAGE}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E78B5564-10CE-469F-9C55-B56C3E7D41A7</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -467,6 +554,10 @@ print $results;
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -505,21 +596,223 @@ print $results;
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>from __future__ import print_function
+from workflow import Workflow
+from workflow.util import set_config
+from subprocess import Popen, PIPE
+import os
+import keychain
+import shlex
+
+log = None
+wf = Workflow()
+result = {}  # type: dict
+result["items"] = []
+my_env = os.environ.copy()
+my_env["PATH"] = "/usr/local/bin:/opt/local/bin:" + my_env["PATH"]
+
+def build_osascript(login_mail, title, mfa_enabled=None, mfa_method=None):
+    log.debug('login: START for {user} and title: {title}'.format(user=login_mail, title=title))
+    if not mfa_enabled:
+        args = [login_mail, title, 'hidden']
+    else:
+        args = [login_mail, title, '']
+    password = None
+    script = """on run argv
+    set AppleScript's text item delimiters to " "
+    if item 3 of argv as string contains "hidden" then
+      set my_password to display dialog item 2 of argv as string &amp; ":" with title "Bitwarden " &amp; item 1 of argv as string with icon caution default answer "" buttons {"Cancel", "OK"} default button 2 giving up after 295 with hidden answer
+else
+    set my_password to display dialog item 2 of argv as string &amp; ":" with title "Bitwarden " &amp; item 1 of argv as string with icon caution default answer "" buttons {"Cancel", "OK"} default button 2 giving up after 295 with answer
+end if
+    if the button returned of the result is "Cancel" then
+        error number -128
+    else
+    return (text returned of my_password)
+    end if
+    end run
+    """
+    log.debug('login: START osascript to ask for the password.')
+    proc = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    password, err = proc.communicate(script)
+    log.debug('login: Evaluate returned result status from the password entry.')
+    if "-128" in err:
+        log.debug('login: osascript - User cancelled login')
+        return None, True, 'User cancelled login', None
+    elif err:
+        log.debug('login: osascript - An error occured: {err}'.format(err=err))
+        return None, True, 'An error occured, entering password', err
+    elif len(password.strip()) &lt; 1:
+        log.debug('login: osascript - No password was entered - leading and trailing spaces are stripped')
+        return None, True, 'No password was entered', 'Leading and trailing spaces are stripped'
+    return password, err, None, None
+
+
+def login(login_mail, mfa_enabled=None, mfa_method=None):
+    log.debug('login: - bw Start running bw login')
+    password, err, status, message = build_osascript(login_mail, 'Enter Bitwarden password')
+    if err:
+        return out, err, status, message
+
+    if not mfa_enabled:
+        cmd = "/usr/local/bin/bw --raw login \"{login_mail}\" \"{password}\"".format(login_mail=login_mail.strip(), password=password.strip())
+    elif mfa_enabled and not mfa_method:
+        mfa_code, err, status, message = build_osascript(login_mail, 'Enter Bitwarden second factor code', True)
+        cmd = "/usr/local/bin/bw --raw login \"{login_mail}\" \"{password}\" --code {mfa_code}".format(login_mail=login_mail.strip(), password=password.strip(), mfa_code=mfa_code.strip())
+    else:
+        mfa_code, err, status, message = build_osascript(login_mail, 'Enter Bitwarden second factor code', True)
+        cmd = "/usr/local/bin/bw --raw login \"{login_mail}\" \"{password}\" --method {mfa_method} --code {mfa_code}".format(login_mail=login_mail.strip(), password=password.strip(), mfa_method=mfa_method.strip(), mfa_code=mfa_code.strip())
+
+    split_cmd = shlex.split(cmd)
+    proc = Popen(split_cmd, env=my_env, stdout=PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    print('error output: {err}'.format(err=err))
+    password, cmd = None, None
+    log.debug('login: bw Evaluating bw login result')
+    if err:
+        if 'Two-step login' in err:
+            log.debug('login: bw Two Step login in the account enabled but not in the workflow config: {err}'.format(err=err))
+            return out, err, '2FA config not correct/missing.', err
+        log.debug('login: bw An error occured: {err}'.format(err=err))
+        return out, err, 'An error occured while logging in', err
+    if 'incorrect' in out:
+        log.debug('login: bw incorrect credentials {out}'.format(out=out))
+        return out, None, 'Incorrect credentials', out
+    if 'Invalid' in out:
+        log.debug('login: bw Invalid master password {out}'.format(out=out))
+        return out, None, 'Invalid master password', out
+    if 'You are already logged' in out:
+        log.debug('login: bw You are already logged in {out}'.format(out=out))
+        return out, None, 'You are already logged in', out
+    log.debug('login: bw Return login result')
+    return out, None, None, None
+
+def set_notification(status, message):
+        set_config('STATUS_MESSAGE', status)
+        set_config('STATUS_MESSAGE_DESC', message)
+
+def get_bw_exec():
+    log.debug('START get_bw_exec')
+    bw_exec = ""
+    for f in ['/usr/local/bin/bw', '/opt/local/bin/bw', '/usr/bin/bw']:
+        if os.path.exists(f):
+            bw_exec = f
+    if not bw_exec:
+        log.debug('ERROR get_bw_exec: no bw binary found.')
+        set_notification('Bitwarden CLI not found.', 'Please install the Bitwarden CLI first.')
+        exit(2)
+    log.debug('END found get_bw_exec')
+    return bw_exec
+
+
+def set_login():
+    proc = Popen("launchctl setenv BW_ASKPASS true".split(), stdout=PIPE)
+    output = proc.stdout.read().decode()
+    if output:
+        set_notification("Failed to set login env key", output)
+        exit(1)
+    return
+
+
+def main(wf):
+    log.debug('MAIN: Started')
+    out = keychain.getpassword('alfred-bitwarden-email-address')
+    if not out:
+        log.debug('MAIN: No login mail configuration found.')
+        set_notification('Error Login Config', 'No login email is configured.')
+        exit(1)
+    else:
+        login_mail = out.strip()
+
+    out = keychain.getpassword('alfred-bitwarden-2fa-method')
+    if not out:
+        login_mfa_method = False
+        log.debug('MAIN: 2fa method not set')
+    else:
+        login_mfa_method = out.strip()
+
+    out = keychain.getpassword('alfred-bitwarden-2fa-enabled')
+    if not out:
+        login_mfa_enabled = False
+        log.debug('MAIN: 2fa not used')
+    elif 'off' in out:
+        login_mfa_enabled = False
+        log.debug('MAIN: 2fa not used')
+    else:
+        login_mfa_enabled = True
+
+    bw_exec = get_bw_exec()
+
+    if not login_mfa_enabled:
+        log.debug('MAIN: Start login without 2fa')
+        output, err, status, message  = login(login_mail)
+        log.debug('MAIN: login result: {output} (trimmed)'.format(output=output[:15]))
+    elif login_mfa_enabled and not login_mfa_method:
+        log.debug('MAIN: Start login with 2fa but without a method set')
+        output, err, status, message  = login(login_mail, True)
+        log.debug('MAIN: 2fa login result: {output} (trimmed)'.format(output=output[:15]))
+    else:
+        log.debug('MAIN: Start login with 2fa and method set to: {method}'.format(method=login_mfa_method))
+        output, err, status, message  = login(login_mail, True, login_mfa_method)
+        log.debug('MAIN: 2fa with method set login result: {output} (trimmed)'.format(output=output[:15]))
+
+    if err:
+        log.debug('MAIN: Error occured: {err}'.format(err=err))
+        set_notification(status, message)
+        exit(1)
+    if status or message:
+        set_notification(status, message)
+    else:
+        output = keychain.setpassword('alfred-bitwarden-session-key', output.strip())
+        if output:
+            log.debug('MAIN: Error setting session key occured: {output}'.format(output=output))
+            set_notification('Error setting session-key.', output)
+            exit(1)
+        else:
+            set_login()
+            set_notification('Login Successful.', 'User: {user}'.format(user=login_mail))
+
+if __name__ == '__main__':
+    wf = Workflow()
+    log = wf.logger
+    wf.run(main)</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D21298B3-763D-48F9-A804-C3B06D3B70E7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<true/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string>{var:STATUS_MESSAGE_DESC}</string>
 				<key>title</key>
-				<string>Logged in</string>
+				<string>{var:STATUS_MESSAGE}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>E78B5564-10CE-469F-9C55-B56C3E7D41A7</string>
+			<string>9CD82344-6D4F-4C13-BB10-342D19DBE209</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -529,17 +822,151 @@ print $results;
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string>try	set login_email to do shell script "`perl -e 'use strict; use warnings; my $emailAddress =`security find-generic-password -w -s \"alfred-bitwarden-email-address\"`; chomp $emailAddress; print $emailAddress;'`"on error	display alert "Email address not set" message "It appears that no email address has been set. Please run 'bwsetemail your_email@example.com' and try again." as critical	returnend trytell application "Finder"	set current_path to container of (path to me) as aliasend tellset current_unix_path to POSIX path of current_path--set osascript to current_unix_path &amp; "passwordInput.osascript"set osascript to (system attribute "alfred_preferences") &amp; "/workflows/" &amp; (system attribute "alfred_workflow_uid") &amp; "/passwordInput.osascript"try	do shell script "mkdir \"" &amp; (system attribute "alfred_workflow_data") &amp; "\""end trydo shell script "echo \"" &amp; osascript &amp; "\" &gt; \"" &amp; (system attribute "alfred_workflow_data") &amp; "/running_location.txt\""do shell script "export BW_ASKPASS=\"" &amp; osascript &amp; "\""do shell script "launchctl setenv BW_ASKPASS \"" &amp; osascript &amp; "\""tell application "Finder"	if exists POSIX file "/usr/bin/bw" then		set bw_binary to "/usr/bin/bw"	else if exists POSIX file "/usr/local/bin/bw" then		set bw_binary to "/usr/local/bin/bw"	else if exists POSIX file "/opt/local/bin/bw" then		set bw_binary to "/opt/local/bin/bw"	else		display dialog "Bitwarden binary not found"	end ifend tell--improvement required here, test if we actually HAVE an bw_binary and if not error outif ("{query}" = "scriptlocationnotset") then	display notification "Please wait... the alfred search will be presented once unlock is complete." with title "Bitwarden Unlock"end iftry	set output to do shell script "/bin/bash -c 'export PATH=$PATH:/usr/local/bin &amp;&amp; " &amp; "export TERM=\"xterm-256color\" &amp;&amp; export BW_ASKPASS=\"" &amp; osascript &amp; "\" &amp;&amp; " &amp; bw_binary &amp; " --raw unlock     $(" &amp; osascript &amp; " Unlock Password\\ for\\ " &amp; login_email &amp; ")'"	do shell script "/bin/bash -c 'security add-generic-password -a \"alfred-bitwarden-session-key\" -s \"alfred-bitwarden-session-key\" -w \"" &amp; output &amp; "  \" -C \"note\" -U'"	on error the errorMessage number the errorNumber	if errorMessage contains "Invalid master password." then		display alert "Bitwarden Unlock" message "You entered an invalid master password for " &amp; login_email &amp; " Error Message: " &amp; errorMessage &amp; ". " as informational
-		error	else		display alert "Bitwarden Unlock" message "Your account could not be unlocked for " &amp; login_email &amp; " Error Message: " &amp; errorMessage &amp; ". " as critical
-		error	end ifend tryif ("{query}" = "scriptlocationnotset") then	display notification "Please wait... the alfred search will be presented once the unlock is complete." with title "Bitwarden Unlock"end ifif ("{query}" = "scriptlocationnotset") then	tell application "Alfred 3" to search "bw "end ifif ("{query}" = "") then	return "Vault Unlocked"end if</string>
+				<string>from __future__ import print_function
+from workflow import Workflow
+from workflow.util import set_config
+from subprocess import Popen, PIPE
+import os
+import keychain
+import shlex
+
+log = None
+wf = Workflow()
+result = {}  # type: dict
+result["items"] = []
+my_env = os.environ.copy()
+my_env["PATH"] = "/usr/local/bin:/opt/local/bin:" + my_env["PATH"]
+
+def build_osascript(login_mail, title):
+    log.debug('unlock: START for {user} and title: {title}'.format(user=login_mail, title=title))
+    args = [login_mail, title, 'hidden']
+    password = None
+    script = """on run argv
+    set AppleScript's text item delimiters to " "
+    set my_password to display dialog item 2 of argv as string &amp; ":" with title "Bitwarden " &amp; item 1 of argv as string with icon caution default answer "" buttons {"Cancel", "OK"} default button 2 giving up after 295 with hidden answer
+    if the button returned of the result is "Cancel" then
+        error number -128
+    else
+    return (text returned of my_password)
+    end if
+    end run
+    """
+    log.debug('unlock: START osascript to ask for the password.')
+    proc = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    password, err = proc.communicate(script)
+    log.debug('unlock: Evaluate returned result status from the password entry.')
+    if "-128" in err:
+        log.debug('unlock: osascript - User cancelled unlocking')
+        return None, True, 'User cancelled unlocking', None
+    elif err:
+        log.debug('unlock: osascript - An error occured: {err}'.format(err=err))
+        return None, True, 'An error occured, entering password', err
+    elif len(password.strip()) &lt; 1:
+        log.debug('unlock: osascript - No password was entered - leading and trailing spaces are stripped')
+        return None, True, 'No password was entered', 'Leading and trailing spaces are stripped'
+    return password, err, None, None
+
+
+def login(login_mail):
+    log.debug('unlock: - bw Start running bw unlock')
+    password, err, status, message = build_osascript(login_mail, 'Enter Bitwarden password to unlock')
+    if err:
+        return out, err, status, message
+
+    cmd = "/usr/local/bin/bw --raw unlock \"{password}\"".format(password=password.strip())
+    split_cmd = shlex.split(cmd)
+    proc = Popen(split_cmd, env=my_env, stdout=PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    print('error output: {err}'.format(err=err))
+    password, cmd = None, None
+    log.debug('unlock: bw Evaluating bw login result')
+    if err:
+        log.debug('unlock: bw An error occured: {err}'.format(err=err))
+        return out, err, 'An error occured while logging in', err
+    if 'incorrect' in out:
+        log.debug('unlock: bw incorrect credentials {out}'.format(out=out))
+        return out, None, 'Incorrect credentials', out
+    if 'Invalid' in out:
+        log.debug('unlock: bw Invalid master password {out}'.format(out=out))
+        return out, None, 'Invalid master password', out
+    if 'You are already logged' in out:
+        log.debug('unlock: bw you are already logged in {out}'.format(out=out))
+        return out, None, 'You are already logged in', out
+    if 'You are not logged in' in out:
+        log.debug('unlock: bw you are not logged in {out}'.format(out=out))
+        return out, None, 'You are not logged in', out
+    log.debug('unlock: bw Return unlock result')
+    return out, None, None, None
+
+def set_notification(status, message):
+        set_config('STATUS_MESSAGE', status)
+        set_config('STATUS_MESSAGE_DESC', message)
+
+def get_bw_exec():
+    log.debug('START get_bw_exec')
+    bw_exec = ""
+    for f in ['/usr/local/bin/bw', '/opt/local/bin/bw', '/usr/bin/bw']:
+        if os.path.exists(f):
+            bw_exec = f
+    if not bw_exec:
+        log.debug('ERROR get_bw_exec: no bw binary found.')
+        set_notification('Bitwarden CLI not found.', 'Please install the Bitwarden CLI first.')
+        exit(2)
+    log.debug('END found get_bw_exec')
+    return bw_exec
+
+def set_login():
+    proc = Popen("launchctl setenv BW_ASKPASS true".split(), stdout=PIPE)
+    output = proc.stdout.read().decode()
+    if output:
+        set_notification("Failed to set login env key", output)
+        exit(1)
+    return
+
+def main(wf):
+    log.debug('MAIN: Started')
+    out = keychain.getpassword('alfred-bitwarden-email-address')
+    if not out:
+        log.debug('MAIN: No login mail configuration found.')
+        set_notification('Error Login Config', 'No login email is configured.')
+        exit(1)
+    else:
+        login_mail = out.strip()
+
+    bw_exec = get_bw_exec()
+
+    log.debug('MAIN: Start unlock')
+    output, err, status, message  = login(login_mail)
+    log.debug('MAIN: unlock result: {output} (trimmed)'.format(output=output[:15]))
+
+    if err:
+        log.debug('MAIN: Error occured: {err}'.format(err=err))
+        set_notification(status, message)
+        exit(1)
+    if status or message:
+        set_notification(status, message)
+    else:
+        output = keychain.setpassword('alfred-bitwarden-session-key', output.strip())
+        if output:
+            log.debug('MAIN: Error setting session key occured: {output}'.format(output=output))
+            set_notification('Error setting session-key.', output)
+            exit(1)
+        else:
+            set_login()
+            set_notification('Unlock successful.', 'User: {user}'.format(user=login_mail))
+
+if __name__ == '__main__':
+    wf = Workflow()
+    log = wf.logger
+    wf.run(main)</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>3</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -551,23 +978,31 @@ print $results;
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Unlocked for</string>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>9CD82344-6D4F-4C13-BB10-342D19DBE209</string>
+			<string>DE8D285B-733F-4B2D-91DA-4613717E2005</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -612,7 +1047,7 @@ result["items"] = []
 def get_session_key():
     cmd = 'security find-generic-password -w -s alfred-bitwarden-session-key'
     proc = Popen(cmd.split(), stdout=PIPE)
-    output = proc.stdout.read().decode()
+    output = proc.stdout.read().decode('utf8')
     if not output:
         print(json.dumps(error_result(type="login")))
         exit(1)
@@ -621,7 +1056,7 @@ def get_session_key():
 
 def check_login():
     proc = Popen("launchctl getenv BW_ASKPASS".split(), stdout=PIPE)
-    output = proc.stdout.read().decode()
+    output = proc.stdout.read().decode('utf8')
     if not output:
         print(json.dumps(error_result(type="locked")))
         exit(1)
@@ -672,13 +1107,16 @@ def get_bw_search_result(bw_exec, session_key, search):
     cmd = "{bw_exec} --session={session_key} list items --search={search}".format(bw_exec=bw_exec, session_key=session_key, search=search)
     proc = Popen(cmd.split(), env=my_env, stdout=PIPE, stderr=PIPE)
     output, err = proc.communicate()
-    if "mac failed." in err.decode().strip():
+    if "mac failed." in err.decode('utf8').strip():
         print(json.dumps(error_result(type="locked")))
         exit(1)
+    if "Vault is locked." in output.decode('utf8').strip():
+        print(json.dumps(error_result(type="locked")))
+        exit(1)        
     try:
         results = json.loads(output)
     except ValueError:
-        if "You are not logged in" in output.decode():
+        if "You are not logged in" in output.decode('utf8'):
             print(json.dumps(error_result(type="login")))
             exit(1)
     try:
@@ -698,7 +1136,7 @@ def build_bw_result(bw_exec, session_key, search_result):
         name = bw_item["name"]
         try:
             username = bw_item["login"]["username"].encode('utf-8').strip()
-        except KeyError:
+        except (KeyError, AttributeError):
             username = "---"
         try:
             totp = bw_item["login"]["totp"].encode('utf-8').strip()
@@ -741,27 +1179,23 @@ print(json.dumps(result))
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>focusedappvariablename</key>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>title</key>
+				<string>Copied username to clipboard.</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>DE8D285B-733F-4B2D-91DA-4613717E2005</string>
+			<string>8F65DC4B-ED8E-4EE0-A6E0-14C1F0CDF3A4</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -786,40 +1220,57 @@ print(json.dumps(result))
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string>@details=({query});
+				<string>import sys
+import json
+from subprocess import Popen, PIPE
+import os
 
-if ($details[0] eq 'error-noinstall'){
-`open https://github.com/bitwarden/cli`;
-exit 1;
-} else {
+details = sys.argv[1].replace('"','')
+details = details.splitlines()
+details.pop(0)
 
-my $bw_exec;
-foreach my $f (qw@bw /usr/local/bin/bw /opt/local/bin/bw /usr/bin/bw@) {
-    $bw_exec = $f
-        if (-x $f);
-}
+my_env = os.environ.copy()
+my_env["PATH"] = "/usr/local/bin:/opt/local/bin:" + my_env["PATH"]
 
-my $sessionKey =`security find-generic-password -w -s \"alfred-bitwarden-session-key\"`; 
-chomp $loginTimeout;
+def get_bw_exec():
+    bw_exec = ""
+    for f in ['/usr/local/bin/bw', '/opt/local/bin/bw', '/usr/bin/bw']:
+        if os.path.exists(f):
+            bw_exec = f
+    if not bw_exec:
+        print(json.dumps(error_result(type="install")))
+        exit(2)
+    return bw_exec
 
+def getpassword(service):
+    cmd = '/usr/bin/security find-generic-password -w -s {service}'.format(service=service)
+    proc = Popen(cmd.split(), stdout=PIPE)
+    output = proc.stdout.read().decode()
+    return output.strip()
 
-open my $file, '&lt;', $ENV{alfred_workflow_data} . "/running_location.txt"; 
-my $firstLine = &lt;$file&gt;; 
-close $file;
-chomp $myFirstLine;
-
-my $results = qx{export PATH=$PATH:/usr/local/bin &amp;&amp; export BW_SESSION=\"$sessionKey\" &amp;&amp; $bw_exec get username $details[1]};
-chomp $results;
-print $results;
-}</string>
+if 'error-noinstall' in details[0]:
+    cmd = 'open https://github.com/bitwarden/cli'
+    proc = Popen(cmd.split(), stdout=PIPE)
+    exit(1)
+elif 'error-nonefound' in details[0]:
+    exit(1)
+else:
+    bw_exec = get_bw_exec()
+    session_key = getpassword('alfred-bitwarden-session-key')
+    my_env["BW_SESSION"] = str(session_key)
+    cmd = "{bw_exec} get username {item}".format(bw_exec=bw_exec, item=details[1])
+    proc = Popen(cmd.split(), env=my_env, stdout=PIPE)
+    output =  proc.stdout.read().decode()
+    sys.stdout.write(output.strip())
+    sys.stdout.flush()</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>4</integer>
+				<integer>3</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -827,48 +1278,6 @@ print $results;
 			<string>5811419C-5D78-450A-8F28-46CC209BF760</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Copied username to clipboard.</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8F65DC4B-ED8E-4EE0-A6E0-14C1F0CDF3A4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Copied password to clipboard.</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8C058736-CA55-492F-B2EC-8715A0266564</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -888,6 +1297,92 @@ print $results;
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>C2D0FB11-55FC-4FD2-B32A-9923121F0321</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>import sys
+import json
+from subprocess import Popen, PIPE
+import os
+
+details = sys.argv[1].replace('"','')
+details = details.splitlines()
+details.pop(0)
+
+my_env = os.environ.copy()
+my_env["PATH"] = "/usr/local/bin:/opt/local/bin:" + my_env["PATH"]
+
+def get_bw_exec():
+    bw_exec = ""
+    for f in ['/usr/local/bin/bw', '/opt/local/bin/bw', '/usr/bin/bw']:
+        if os.path.exists(f):
+            bw_exec = f
+    if not bw_exec:
+        print(json.dumps(error_result(type="install")))
+        exit(2)
+    return bw_exec
+
+def getpassword(service):
+    cmd = '/usr/bin/security find-generic-password -w -s {service}'.format(service=service)
+    proc = Popen(cmd.split(), stdout=PIPE)
+    output = proc.stdout.read().decode()
+    return output.strip()
+
+if 'error-noinstall' in details[0]:
+    cmd = 'open https://github.com/bitwarden/cli'
+    proc = Popen(cmd.split(), stdout=PIPE)
+    exit(1)
+elif 'error-nonefound' in details[0]:
+    exit(1)
+else:
+    bw_exec = get_bw_exec()
+    session_key = getpassword('alfred-bitwarden-session-key')
+    my_env["BW_SESSION"] = str(session_key)
+    cmd = "{bw_exec} get password {item}".format(bw_exec=bw_exec, item=details[1])
+    proc = Popen(cmd.split(), env=my_env, stdout=PIPE)
+    output =  proc.stdout.read().decode()
+    sys.stdout.write(output.strip())
+    sys.stdout.flush()</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D049EE1A-03D1-4BDF-8920-EE8667E7365C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Copied password to clipboard.</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8C058736-CA55-492F-B2EC-8715A0266564</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -914,47 +1409,32 @@ print $results;
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>127</integer>
 				<key>script</key>
-				<string>use Env;
+				<string>#!/bin/bash
+for f in bw /usr/local/bin/bw /opt/local/bin/bw /usr/bin/bw; do
+    if test -x $f; then
+        bw_exec=$f
+    fi
+done
+export PATH=$PATH:/usr/local/bin &amp;&amp; $bw_exec logout
 
-@details=({query});
+security delete-generic-password -s alfred-bitwarden-session-key &gt; /dev/null
 
-if ($details[0] eq 'error-noinstall'){
-`open https://github.com/bitwarden/cli`;
-exit 0;
-} elsif ($details[0] eq 'error-nonefound'){
-exit 1;
-} else {
+launchctl unsetenv BW_ASKPASS
 
-my $bw_exec;
-foreach my $f (qw@bw /usr/local/bin/bw /opt/local/bin/bw /usr/bin/bw@) {
-    $bw_exec = $f
-        if (-x $f);
-}
-
-my $sessionKey =`security find-generic-password -w -s \"alfred-bitwarden-session-key\"`; 
-
-open my $file, '&lt;', $ENV{alfred_workflow_data} . "/running_location.txt"; 
-my $firstLine = &lt;$file&gt;; 
-close $file;
-chomp $myFirstLine;
-
-my $results = qx{export PATH=$PATH:/usr/local/bin &amp;&amp; export BW_SESSION=\"$sessionKey\" &amp;&amp; $bw_exec get password $details[1]};
-chomp $results;
-print $results;
-}</string>
+osascript -e 'tell application "Alfred 3" to search "bw"'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>4</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>D049EE1A-03D1-4BDF-8920-EE8667E7365C</string>
+			<string>A2718C33-DE84-4E0F-8A09-37DA3C9E8732</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -982,37 +1462,6 @@ print $results;
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>#!/bin/bash
-for f in bw /usr/local/bin/bw /opt/local/bin/bw /usr/bin/bw; do
-    if test -x $f; then
-        bw_exec=$f
-    fi
-done
-export PATH=$PATH:/usr/local/bin &amp;&amp; $bw_exec logout
-
-security delete-generic-password -s alfred-bitwarden-session-key /dev/null 2&amp;&gt;1</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A2718C33-DE84-4E0F-8A09-37DA3C9E8732</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1028,27 +1477,6 @@ security delete-generic-password -s alfred-bitwarden-session-key /dev/null 2&amp
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>266860CE-FC28-42E1-998B-229C5AEDF262</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>bwsync</string>
-				<key>subtext</key>
-				<string>Sync Bitwarden Vault</string>
-				<key>text</key>
-				<string>Sync Bitwarden Vault</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>FF2D41F7-FB7E-4CCD-B82B-4F66FCC78F37</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1132,6 +1560,27 @@ print("Sync completed successfully.")</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bwsync</string>
+				<key>subtext</key>
+				<string>Sync Bitwarden Vault</string>
+				<key>text</key>
+				<string>Sync Bitwarden Vault</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>FF2D41F7-FB7E-4CCD-B82B-4F66FCC78F37</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1153,6 +1602,27 @@ print("Sync completed successfully.")</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Login Email Address Set To:</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8820573B-DB5E-4B65-9178-3DD86CF620CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1162,7 +1632,9 @@ print("Sync completed successfully.")</string>
 
 security add-generic-password -a "alfred-bitwarden-email-address" -s "alfred-bitwarden-email-address" -w "{query}" -C "note" -U
 
-echo "{query}"</string>
+echo "{query}"
+
+osascript -e 'tell application "Alfred 3" to search "bw"'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -1195,27 +1667,6 @@ echo "{query}"</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>59F80385-2185-4AB0-BE88-A49588D5F66B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Login Email Address Set To:</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8820573B-DB5E-4B65-9178-3DD86CF620CC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1258,7 +1709,9 @@ done
 export PATH=$PATH:/usr/local/bin
 $bw_exec config server {query} &gt; /dev/null 2&gt;&amp;1
 
-echo {query}</string>
+echo {query}
+
+osascript -e 'tell application "Alfred 3" to search "bw"'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -1291,6 +1744,208 @@ echo {query}</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>B4A5236B-C4A6-4799-A0BE-28E6035E6337</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/bin/bash
+
+if ! [[ $1 == "on" ]] &amp;&amp; ! [[ $1 == "off" ]]; then
+	echo "error: $1 - Neither on nor off";
+	exit 1;
+fi
+
+security add-generic-password -a "alfred-bitwarden-2fa-enabled" -s "alfred-bitwarden-2fa-enabled" -w "$1" -C "note" -U
+
+echo "$1"
+
+osascript -e 'tell application "Alfred 3" to search "bw"'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C594F6CC-98D0-45DF-871B-AACC53E6B44C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>bwset2fa</string>
+				<key>subtext</key>
+				<string>on/off</string>
+				<key>text</key>
+				<string>Bitwarden 2FA login</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DF86BC53-DFDC-4862-879C-2988E0680511</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>2FA login:</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2262A79A-ACCC-44CF-9C89-051CB07A0CB4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>bwset2famethod</string>
+				<key>subtext</key>
+				<string>0-5 (Not required for Authenticator App provider)</string>
+				<key>text</key>
+				<string>Set Bitwarden 2FA method</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>FED5E784-7A96-4E70-BA0D-40E4C79B7C98</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/bin/bash
+
+re='^[0-5]+$'
+if ! [[ $1 =~ $re ]] || ! [[ ${#1} == "1" ]]; then
+	echo "error: $1 - Not a number in range 0-5";
+	exit 1;
+fi
+
+security add-generic-password -a "alfred-bitwarden-2fa-method" -s "alfred-bitwarden-2fa-method" -w "$1" -C "note" -U
+
+echo "$1"
+
+osascript -e 'tell application "Alfred 3" to search "bw"'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>69788964-322B-4148-ADFF-46DD4DB9276E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>2FA method set to:</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7D01ACF0-2569-46CE-8A8D-AD9CD3736476</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/bin/bash
+
+security delete-generic-password -s alfred-bitwarden-2fa-method &gt; /dev/null
+echo "{query}"
+
+osascript -e 'tell application "Alfred 3" to search "bw"'</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>58852D6A-18EC-4719-8B6D-3830DE3EECE7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>2FA method removed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>C59B281E-81B3-45CC-AF44-99A6A66C2087</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1332,6 +1987,13 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<key>ypos</key>
 			<integer>450</integer>
 		</dict>
+		<key>2262A79A-ACCC-44CF-9C89-051CB07A0CB4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>1010</integer>
+		</dict>
 		<key>266860CE-FC28-42E1-998B-229C5AEDF262</key>
 		<dict>
 			<key>xpos</key>
@@ -1367,6 +2029,13 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<key>ypos</key>
 			<integer>340</integer>
 		</dict>
+		<key>58852D6A-18EC-4719-8B6D-3830DE3EECE7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>510</integer>
+			<key>ypos</key>
+			<integer>1240</integer>
+		</dict>
 		<key>58BA8F4E-3368-453A-9490-DBE7FE60328C</key>
 		<dict>
 			<key>xpos</key>
@@ -1387,6 +2056,20 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<integer>880</integer>
 			<key>ypos</key>
 			<integer>10</integer>
+		</dict>
+		<key>69788964-322B-4148-ADFF-46DD4DB9276E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>510</integer>
+			<key>ypos</key>
+			<integer>1130</integer>
+		</dict>
+		<key>7D01ACF0-2569-46CE-8A8D-AD9CD3736476</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>1130</integer>
 		</dict>
 		<key>815177FB-CED1-42F3-AC5B-C1AC60735FA1</key>
 		<dict>
@@ -1465,6 +2148,20 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<key>ypos</key>
 			<integer>450</integer>
 		</dict>
+		<key>C594F6CC-98D0-45DF-871B-AACC53E6B44C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>510</integer>
+			<key>ypos</key>
+			<integer>1010</integer>
+		</dict>
+		<key>C59B281E-81B3-45CC-AF44-99A6A66C2087</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>1240</integer>
+		</dict>
 		<key>D049EE1A-03D1-4BDF-8920-EE8667E7365C</key>
 		<dict>
 			<key>xpos</key>
@@ -1493,6 +2190,13 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<key>ypos</key>
 			<integer>300</integer>
 		</dict>
+		<key>DF86BC53-DFDC-4862-879C-2988E0680511</key>
+		<dict>
+			<key>xpos</key>
+			<integer>220</integer>
+			<key>ypos</key>
+			<integer>1010</integer>
+		</dict>
 		<key>E78B5564-10CE-469F-9C55-B56C3E7D41A7</key>
 		<dict>
 			<key>xpos</key>
@@ -1507,6 +2211,13 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<key>ypos</key>
 			<integer>890</integer>
 		</dict>
+		<key>FED5E784-7A96-4E70-BA0D-40E4C79B7C98</key>
+		<dict>
+			<key>xpos</key>
+			<integer>220</integer>
+			<key>ypos</key>
+			<integer>1130</integer>
+		</dict>
 		<key>FF2D41F7-FB7E-4CCD-B82B-4F66FCC78F37</key>
 		<dict>
 			<key>xpos</key>
@@ -1515,8 +2226,20 @@ My thanks go out to Bitwarden for their awesome product and the new CLI!</string
 			<integer>670</integer>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict>
+		<key>STATUS_MESSAGE</key>
+		<string></string>
+		<key>STATUS_MESSAGE_DESC</key>
+		<string></string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>STATUS_MESSAGE_DESC</string>
+		<string>STATUS_MESSAGE</string>
+	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.2.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/blacs30/bitwarden-alfred-workflow</string>
 </dict>

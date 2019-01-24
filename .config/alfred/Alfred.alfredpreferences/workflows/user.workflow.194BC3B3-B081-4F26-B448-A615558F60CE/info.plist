@@ -19,6 +19,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -27,7 +29,7 @@
 	<key>description</key>
 	<string>Focus iMessages by typing part of the name/handle</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>iMessages</string>
 	<key>objects</key>
@@ -35,12 +37,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>62</integer>
 				<key>keyword</key>
 				<string>im</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>Starting Messages.app … please wait</string>
 				<key>script</key>
@@ -63,6 +79,10 @@ services is "Gmail"
 	end repeat
 	set out to out &amp; "\t&lt;/items&gt;"
 end tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
 				<string>Type part of the name/handle</string>
 				<key>title</key>
@@ -76,14 +96,22 @@ end tell</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>A29474FC-452A-4A51-A814-00EB9A8FC5D7</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>63</integer>
 				<key>script</key>
 				<string>tell application "Messages"	activate	send "" to item 1 of (buddies whose id is "{query}")end tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
 				<integer>6</integer>
 			</dict>
@@ -91,6 +119,8 @@ end tell</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>23B6ABB4-173A-4465-B138-C375C4D0EED2</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -99,11 +129,15 @@ end tell</string>
 	<dict>
 		<key>23B6ABB4-173A-4465-B138-C375C4D0EED2</key>
 		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
 		<key>A29474FC-452A-4A51-A814-00EB9A8FC5D7</key>
 		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
