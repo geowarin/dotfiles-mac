@@ -6,6 +6,8 @@ source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
 
 source "$XDG_CONFIG_HOME/zsh/fzf.zsh"
 
+source "$XDG_CONFIG_HOME/zsh/additional-completions.zsh"
+
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 source "$XDG_CONFIG_HOME/zsh/kubectl_aliases.zsh"
 source "$XDG_CONFIG_HOME/zsh/functions.zsh"

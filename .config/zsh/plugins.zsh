@@ -17,6 +17,12 @@ zplug "Seinh/git-prune"
 zplug "wfxr/forgit", defer:1
 zplug "MichaelAquilina/zsh-you-should-use"
 
+zplug "greymd/docker-zsh-completion"
+
+# kubectl fzf completions
+# zplug "plugins/kubectl", from:oh-my-zsh, defer:2
+# zplug "bonnefoa/kubectl-fzf", defer:3
+
 # Prompt
 zplug mafredri/zsh-async, from:github
 zplug "sindresorhus/pure"
