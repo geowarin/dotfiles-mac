@@ -2,7 +2,8 @@
 
 My dotfiles. I'm a java{,script} developer.
 
-I use [yadm](https://thelocehiliosan.github.io/yadm/) to manage them. It's a wrapper around git that can encrypt files and stuff.
+https://www.atlassian.com/git/tutorials/dotfiles
+
 
 I've been inspired by [gverilla](https://github.com/gverilla/dotfiles) to follow the [xdg](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 standard in which all of the config is stored in `.config` and therefore not cluttering the home.
@@ -15,21 +16,8 @@ add the workaround to `/.config/zsh/zshenv` (often an alias or an env variable).
 ## Install
 
 ```
-TMP=`mktemp -d`
-curl -fLo "$TMP/yadm" https://github.com/TheLocehiliosan/yadm/raw/master/yadm && chmod a+x "$TMP/yadm"
-XDG_CONFIG_HOME=$HOME/.config
-XDG_DATA_HOME=$HOME/.local/share
-YADM_HOME="$XDG_CONFIG_HOME/yadm"
-YADM_DATA="$XDG_DATA_HOME/yadm"
-"$TMP/yadm" -Y $YADM_HOME --yadm-repo $YADM_DATA/repo.git clone --bootstrap https://github.com/geowarin/dotfiles
+curl -Lks https://raw.githubusercontent.com/geowarin/dotfiles/master/.bin/install.sh | /bin/bash
 ```
-
-This will prompt you to run the [boostrap file](https://github.com/geowarin/dotfiles/blob/master/.config/yadm/bootstrap).
-
-## Bootstrap
-
-Bootstrap installs brew and executes the Brewfile.
-It will then setup your default shell to be zsh.
 
 ## Zsh
 

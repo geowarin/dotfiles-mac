@@ -1,5 +1,7 @@
 XDG_CONFIG_HOME=$HOME/.config
 
+system_type=$(uname -s)
+
 source "$XDG_CONFIG_HOME/zsh/zshenv"
 
 source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
@@ -9,7 +11,13 @@ source "$XDG_CONFIG_HOME/zsh/fzf.zsh"
 source "$XDG_CONFIG_HOME/zsh/additional-completions.zsh"
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+if [ "$system_type" = "Darwin" ]; then
+    source "$XDG_CONFIG_HOME/zsh/aliases-osx.zsh"
+fi
+
 source "$XDG_CONFIG_HOME/zsh/kubectl_aliases.zsh"
 source "$XDG_CONFIG_HOME/zsh/functions.zsh"
-
-jdk 13
+if [ "$system_type" = "Darwin" ]; then
+    source "$XDG_CONFIG_HOME/zsh/functions-osx.zsh"
+    jdk 14
+fi
