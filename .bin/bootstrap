@@ -32,5 +32,10 @@ elif [ "$system_type" = "Linux" ]; then
 
   # For the history to be stored correctly
   mkdir -p "$HOME/.local/share/zsh"
+
+  # zplug
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+  pamac install fzf
 fi
 

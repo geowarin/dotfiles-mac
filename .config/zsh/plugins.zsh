@@ -1,4 +1,10 @@
-export ZPLUG_HOME=/usr/local/opt/zplug
+
+system_type=$(uname -s)
+if [ "$system_type" = "Darwin" ]; then
+    export ZPLUG_HOME=/usr/local/opt/zplug
+else
+    export ZPLUG_HOME=~/.zplug
+fi
 
 source $ZPLUG_HOME/init.zsh
 
