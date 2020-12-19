@@ -103,7 +103,7 @@ alias more='less'
 alias cdtmp='cd `mktemp -d /tmp/dev-XXXXXX`'
 alias zconf="st $XDG_CONFIG_HOME"
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias df='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # Download subtitles for all the videos in the current directory
 # alias subs="docker run --rm -v '$XDG_CACHE_HOME/subliminal_cache:/usr/src/cache' -v '$(pwd):/tvshows' -it diaoulael/subliminal download -l en download /tvshows"
