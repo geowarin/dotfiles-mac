@@ -9,7 +9,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 # base directory relative to which user-specific non-essential (cached) data should be written
 export XDG_CACHE_HOME=$HOME/.cache
 # defines the base directory relative to which user-specific non-essential runtime files and other file objects (such as sockets, named pipes, ...)
-export XDG_RUNTIME_DIR=/tmp
+# export XDG_RUNTIME_DIR=/tmp
 
 # export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
