@@ -140,3 +140,5 @@ alias kccc='kubectl config current-context'
 
 # List all contexts
 alias kcgc='kubectl config get-contexts'
+
+alias pb="curl -F 'file=@-' https://0x0.st"
