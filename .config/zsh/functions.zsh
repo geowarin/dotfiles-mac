@@ -46,8 +46,14 @@ function dl-site() {
 	wget --mirror --convert-links --adjust-extension --page-requisites -U Mozilla --no-parent -e robots=off --wait=3 --random-wait --limit-rate=900k --no-check-certificate $@
 }
 
+# download a video from url
 vlcd() {
 	local FILENAME=$(echo $1 | rev | cut -d"/" -f1 | rev)
 	echo "downloading to /tmp/${FILENAME}.mp4..."
 	vlc -v $1 --sout file/ts:/tmp/${FILENAME}.mp4
+}
+
+# run in background and detach
+bgh() { 
+	"$@" &>/dev/null & 
 }
