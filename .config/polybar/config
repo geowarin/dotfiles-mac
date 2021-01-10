@@ -1,0 +1,53 @@
+[colors]
+background = #fa1e2122
+foreground = #e3eaf3
+primary = #02c084
+secondary = #65a2d9
+tertiary = #d07ef2
+fourth = #e5c246
+alert = #ed404c
+
+include-directory = ~/.config/polybar/modules/
+
+[base]
+width = 100%
+height = 35
+radius = 6.0
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = NotoSansMono Nerd Font:pixelsize=11:antialias=true;2.5
+font-1 = NotoSansMono Nerd Font:style=Regular:pixelsize=17:antialias=true;3
+# margins
+border-top-size = 4
+border-right-size = 20
+border-left-size = 20
+border-color = #00000000
+# decoration under workspaces
+line-size = 3
+# pointer
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/primary]
+inherit = base
+;monitor = ${env:MONITOR:HDMI-1}
+modules-left = i3
+modules-center = xwindow
+modules-right = date
+
+[bar/secondary]
+inherit = base
+monitor = HDMI-0
+modules-left = i3
+
+[settings]
+;screenchange-reload = true
+pseudo-transparency = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+wm-restack = i3
+override-redirect = true
