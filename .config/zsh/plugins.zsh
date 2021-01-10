@@ -36,8 +36,6 @@ zplug "sindresorhus/pure"
 # Syntax highlighting needs to be loaded after compinit
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-#zplug "TheLocehiliosan/yadm", use:"completion/_yadm", as:command, defer:2
-
 export ZPLUG_LOADFILE="$XDG_CONFIG_HOME/zsh/zplug.zsh"
 if ! zplug check; then
     zplug install
