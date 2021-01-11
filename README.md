@@ -8,12 +8,21 @@ https://wiki.archlinux.org/index.php/Dotfiles
 
 https://www.atlassian.com/git/tutorials/dotfiles
 
+## Compatibility: Manjaro & Macos
+
+I used macos when I first compiled my dotfiles.
+
+I've now switched to manjaro (Plasma/i3). 
+
+The install process should be compatible with both systems.
 
 ## Install
 
 ```
 curl -Lks https://raw.githubusercontent.com/geowarin/dotfiles/master/.bin/install.sh | /bin/bash
 ```
+
+Then you might want to run `.bin/boostrap.sh` to install the necessay dependecies with brew (macos) or pamac (manjaro).
 
 ## Zsh
 
