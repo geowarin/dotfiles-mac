@@ -36,6 +36,24 @@ elif [ "$system_type" = "Linux" ]; then
   # zplug
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
-  pamac install fzf
+  # zsh stuff
+  pamac install fzf highlight hub
+
+  # utils - commandline
+  pamac install tldr ripgrep fd docker openbsd-netcat
+
+  # utils - gui
+  pamac install zeal-git bitwarden
+
+  # i3
+  pamac install i3-gaps polybar feh dunst albert
+
+  # rice
+  pamac install xsettingsd
+
+  # gnome-keyring
+
+  # Remove this freakin kscreen hanging i3
+  rm -rf .local/share/kscreen
 fi
 
