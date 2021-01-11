@@ -2,16 +2,12 @@
 
 My dotfiles. I'm a java{,script} developer.
 
+I use the "bare repository and alias method" described here:
+
+https://wiki.archlinux.org/index.php/Dotfiles
+
 https://www.atlassian.com/git/tutorials/dotfiles
 
-
-I've been inspired by [gverilla](https://github.com/gverilla/dotfiles) to follow the [xdg](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
-standard in which all of the config is stored in `.config` and therefore not cluttering the home.
-
-It requires a bit of thouroughness to follow this standard: some of the tools that I use might not be compatible by default.
-
-The rule of thumbs is: if you find a dotfile in your home that you would prefer to keep, consult [this guide](https://wiki.archlinux.org/index.php/XDG_Base_Directory_support) and 
-add the workaround to `/.config/zsh/zshenv` (often an alias or an env variable).
 
 ## Install
 
@@ -26,6 +22,5 @@ See [.config/zsh/plugins.zsh](https://github.com/geowarin/dotfiles/blob/master/.
 
 ## Making changes
 
-When you modify the files that are versionned, use `yadm add`, `yadm commit` and `yadm push` (if you forked the repo).
-
-I suggest that you only commit the `.config` files, that will keep everything clean.
+When you modify the files that are not versionned, from your home directory, use `df add .config/my/file`, `df commit` and `df push`.
+Otherwise simply `df add -u` to add all the modified files to staging.
