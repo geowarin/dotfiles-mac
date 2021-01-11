@@ -31,5 +31,5 @@ See [.config/zsh/plugins.zsh](https://github.com/geowarin/dotfiles/blob/master/.
 
 ## Making changes
 
-When you modify the files that are not versionned, from your home directory, use `df add .config/my/file`, `df commit` and `df push`.
+When you modify files that are not versionned, from your home directory, use `df add .config/my/file`, `df commit` and `df push`.
 Otherwise simply `df add -u` to add all the modified files to staging.
