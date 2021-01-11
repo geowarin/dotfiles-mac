@@ -9,7 +9,7 @@ font pango:monospace 8
 
 # gaps
 set $inner 20
-set $outerTop 0
+set $outerTop 40
 set $outerBottom 0
 set $radius 6
 
@@ -218,6 +218,7 @@ for_window [class="krunner"] floating enable
 for_window [class="Kmix"] floating enable
 for_window [class="Klipper"] floating enable
 for_window [class="Plasmoidviewer"] floating enable
+for_window [class="plasmawindowed"] floating enable
 
 # >>> Window Rules <<<
 
