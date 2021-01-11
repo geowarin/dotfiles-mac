@@ -32,14 +32,15 @@ cursor-scroll = ns-resize
 # for systray to work
 override-redirect = true
 wm-restack = i3
+padding-right = 1
 
 [bar/primary]
 inherit = base
 ;monitor = ${env:MONITOR:HDMI-1}
 modules-left = i3
 modules-center = xwindow
-modules-right = updates-pacman pulseaudio date
-module-margin-right = 1
+modules-right = updates-pacman xkeyboard pulseaudio date  
+module-margin = 0
 
 tray-position = right
 tray-padding = 4
