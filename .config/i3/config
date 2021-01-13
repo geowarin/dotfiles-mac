@@ -302,6 +302,8 @@ for_window [class="Pamac-manager"] floating enable
 # |______/_/ \_\______\_____|
 #      
 
+# get auth work with polkit-gnome:
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # dex execute .desktop files:
 exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart
@@ -324,7 +326,7 @@ exec --no-startup-id nitrogen --restore
 exec --no-startup-id xset s 480 dpms 600 600 600
 
 exec_always --no-startup-id ~/.config/polybar/start.sh
-# exec_always --no-startup-id picom
+#exec_always --no-startup-id picom
 exec_always --no-startup-id pkill dunst; dunst
 
 #   _____ _                _             _   
@@ -338,7 +340,7 @@ exec_always --no-startup-id pkill dunst; dunst
 #bindsym $mod+d exec albert show
 
 # rofi bindings fancy application menu
-bindsym $mod+i exec rofi -modi drun -show drun -line-padding 4 \
+bindsym $mod+d exec rofi -modi drun -show drun -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar \
                 -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
                 
