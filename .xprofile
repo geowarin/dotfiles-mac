@@ -1,0 +1,6 @@
+#nvidia-settings --load-config-only
+#nvidia-settings --assign CurrentMetaMode="DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}, HDMI-0: nvidia-auto-select +2560+100 {ForceCompositionPipeline=On}"
+#nvidia-settings --assign CurrentMetaMode="DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, HDMI-0: nvidia-auto-select +2560+100 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+
+
+#nvidia-settings --assign CurrentMetaMode="DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}, HDMI-0: nvidia-auto-select +2560+0 {ForceCompositionPipeline=On}"
