@@ -42,7 +42,7 @@ elif [ "$system_type" = "Linux" ]; then
   # i3
   pacman -S i3-gaps feh dunst 
   #albert
-  yay -S polybar picom-jonaburg-git
+  yay -S polybar picom-ibhagwan-git
   yay -S nerd-fonts-jetbrains-mono
 
   # zsh stuff

@@ -22,7 +22,7 @@ smart_borders on
 
 #set $borderSize 3
 set $borderSize 0
-set $focusBorder #FE7C8E
+set $focusBorder #FE7C8E22
 set $unFocusBorder #7658a8
 set $bg #ed6f81
 set $fg #FFFFFF
@@ -323,10 +323,10 @@ exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart
 exec --no-startup-id nitrogen --restore
 
 #set powersavings for display:
-exec --no-startup-id xset s 480 dpms 600 600 600
+#exec --no-startup-id xset s 480 dpms 600 600 600
 
 exec_always --no-startup-id ~/.config/polybar/start.sh
-#exec_always --no-startup-id picom
+exec_always --no-startup-id pkill picom; picom
 exec_always --no-startup-id pkill dunst; dunst
 
 #   _____ _                _             _   

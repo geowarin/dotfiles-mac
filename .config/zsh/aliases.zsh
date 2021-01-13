@@ -141,4 +141,7 @@ alias kccc='kubectl config current-context'
 # List all contexts
 alias kcgc='kubectl config get-contexts'
 
-alias pb="curl -F 'file=@-' https://0x0.st"
+# usage cat log | sharecb
+alias sharecb="curl -F 'file=@-' https://0x0.st"
+
+alias restart-dm="sudo systemctl restart display-manager"
