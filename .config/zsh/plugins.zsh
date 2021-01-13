@@ -1,12 +1,10 @@
 
 system_type=$(uname -s)
 if [ "$system_type" = "Darwin" ]; then
-    export ZPLUG_HOME=/usr/local/opt/zplug
+    source /usr/local/opt/zplug/init.zsh
 else
-    export ZPLUG_HOME=~/.zplug
+    source /usr/share/zsh/scripts/zplug/init.zsh
 fi
-
-source $ZPLUG_HOME/init.zsh
 
 zplug "rupa/z", use:z.sh
 

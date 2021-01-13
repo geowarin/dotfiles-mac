@@ -28,16 +28,24 @@ if [ "$system_type" = "Darwin" ]; then
 
   source "$HOME/.bin/macos.sh"
 elif [ "$system_type" = "Linux" ]; then
+
+  pacman -S zsh
   chsh -s /usr/bin/zsh
 
   # For the history to be stored correctly
   mkdir -p "$HOME/.local/share/zsh"
 
   # zplug
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  yay -S zplug
+  pacman -S fzf
+
+  # i3
+  pacman -S i3-gaps feh dunst 
+  #albert
+  yay -S polybar picom-jonaburg-git
 
   # zsh stuff
-  pamac install fzf highlight hub
+  pamac install highlight hub
 
   # utils - commandline
   pamac install tldr ripgrep fd docker openbsd-netcat
