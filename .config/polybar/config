@@ -54,6 +54,7 @@ tray-maxsize = 16
 inherit = base
 monitor = HDMI-0
 modules-left = i3
+modules-right = gamemode
 
 [settings]
 ;screenchange-reload = true
