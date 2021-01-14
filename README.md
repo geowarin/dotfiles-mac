@@ -8,11 +8,11 @@ https://wiki.archlinux.org/index.php/Dotfiles
 
 https://www.atlassian.com/git/tutorials/dotfiles
 
-## Compatibility: Manjaro & Macos
+## Compatibility: Arch & Macos
 
 I used macos when I first compiled my dotfiles.
 
-I've now switched to manjaro (Plasma/i3). 
+I've now switched to arch (endeavourOs). 
 
 The install process should be compatible with both systems.
 
