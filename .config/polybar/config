@@ -41,7 +41,7 @@ inherit = base
 ;monitor = ${env:MONITOR:HDMI-1}
 modules-left = i3
 modules-center = xwindow
-modules-right = updates-pacman xkeyboard pulseaudio date  
+modules-right = updates-pacman ddc xkeyboard pulseaudio date  
 module-margin = 0
 
 tray-position = right

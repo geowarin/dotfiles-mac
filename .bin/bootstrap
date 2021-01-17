@@ -41,9 +41,10 @@ elif [ "$system_type" = "Linux" ]; then
 
   # i3
   pacman -S i3-gaps feh dunst 
-  #albert
   yay -S polybar picom-ibhagwan-git
   yay -S nerd-fonts-jetbrains-mono
+
+  yay -S xclip bitwarden-rofi rofi-greenclip
 
   # zsh stuff
   pamac install highlight hub
