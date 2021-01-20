@@ -34,6 +34,7 @@ elif [ "$system_type" = "Linux" ]; then
 
   # For the history to be stored correctly
   mkdir -p "$HOME/.local/share/zsh"
+  mkdir -p "$HOME/.local/share/z"
 
   # zplug
   yay -S zplug
