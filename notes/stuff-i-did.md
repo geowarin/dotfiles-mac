@@ -17,6 +17,8 @@ set-card-profile alsa_card.pci-0000_01_00.1 off
 about:config
 layout.frame_rate = 120
 
+layers.acceleration.force-enabled = true
+
 
 ## DDC with ddcutil
 
