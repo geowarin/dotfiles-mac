@@ -1,10 +1,13 @@
 #!/bin/sh
 
 t=0
+if [[ $(ddcutil getvcp 10 -d 2 --terse | cut -d" " -f4) > 49 ]]; then
+    t=1
+fi
 
 brightness() {
-    ddcutil setvcp 10 $1 -d 1 --async &> /dev/null
-    ddcutil setvcp 10 $1 -d 2 --async &> /dev/null
+    ddcutil setvcp 10 $1 -d 1 --noverify --less-sleep &> /dev/null
+    ddcutil setvcp 10 $1 -d 2 --noverify --less-sleep &> /dev/null
 }
 
 toggle() {

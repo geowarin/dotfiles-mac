@@ -8,41 +8,41 @@ font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
 
 # gaps
-set $inner 20
-set $outerTop 40
+set $inner 10
+set $outerTop 45
 set $outerBottom 0
 set $radius 6
 
 gaps inner $inner
 gaps top $outerTop
 gaps bottom $outerBottom
-#focus_follows_mouse no
-smart_borders on
+gaps left 10
+gaps right 10
 #border_radius $radius
 
-#set $borderSize 3
-set $borderSize 0
-set $focusBorder #FE7C8E22
-set $unFocusBorder #7658a8
-set $bg #ed6f81
-set $fg #FFFFFF
-
-for_window [class=".*"] border pixel 0
-
 # Borders
-# CLASS                 BORDER                  BACK            TEXT            INDICATOR
-client.focused          $focusBorder            $focusBorder    $focusBorder    $bg
-client.focused_inactive $unFocusBorder          $unFocusBorder  $unFocusBorder  $unFocusBorder
-client.unfocused        $unFocusBorder          $unFocusBorder  $unFocusBorder  $unFocusBorder
-client.urgent           $unFocusBorder          $unFocusBorder  $unFocusBorder  $unFocusBorder
+set $borderSize 2
+#smart_borders on
+for_window [class=".*"] border pixel $borderSize
 
-# Use pactl to adjust volume in PulseAudio.
-#set $refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# colors
+set $background #333B4F
+set $foreground #eeffff
+set $primary #007acc
+set $secondary #02c084
+set $tertiary #d07ef2
+set $fourth #e5c246
+set $alert #ed404c
+set $unfocused #5f676a
 
+
+# Color settings        Border       Background   Text          Indicator  Child border
+client.focused          $primary     $primary     $foreground   $fourth    $primary
+client.focused_inactive $unfocused   $unfocused   $foreground   #434c5e    $unfocused
+client.unfocused        $unfocused   $unfocused   $foreground   #434c5e    $unfocused
+client.urgent           $fourth      $fourth      #000000       $alert     $fourth
+
+focus_follows_mouse no
 
 # Multimedia Keys:
 
@@ -78,12 +78,9 @@ bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+Return exec kitty
 
 # kill focused window
-#bindsym $mod+Shift+Q kill
 bindsym $mod+c kill
 
 # change focus
@@ -149,6 +146,19 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Screen assigning
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+
+workspace $ws6 output HDMI-0
+workspace $ws7 output HDMI-0
+workspace $ws8 output HDMI-0
+workspace $ws9 output HDMI-0
+workspace $ws10 output HDMI-0
+
 # switch to workspace
 bindsym $mod+ampersand workspace number $ws1
 bindsym $mod+eacute workspace number $ws2
@@ -172,8 +182,6 @@ bindsym $mod+Shift+egrave move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+ccedilla move container to workspace number $ws9
 bindsym $mod+Shift+agrave move container to workspace number $ws10
-
-
 
 # move focused window and swap to that screen
 bindsym $mod+Control+1 move container to workspace $ws1; workspace $ws1
@@ -201,8 +209,7 @@ bindsym $mod+Shift+Control+h move container to output left
 bindsym $mod+Shift+Control+Right move container to output right
 bindsym $mod+Shift+Control+Left move container to output left
 
-
-
+for_window [title=".*\(Private Browsing\).*"] move to workspace $ws5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -252,48 +259,6 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 
-
-# >>> Plasma Integration <<<
-# Try to kill the wallpaper set by Plasma (it takes up the entire workspace
-# and hides everythiing)
-#exec --no-startup-id wmctrl -c Plasma
-#for_window [title="Desktop — Plasma"] kill; floating enable; border none
-#for_window [class="albert"] border none
-
-# Avoid tiling popups, dropdown windows from plasma
-# for_window [class="plasmashell"] floating enable
-# for_window [class="Plasma"] floating enable
-# for_window [class="krunner"] floating enable
-# for_window [class="Kmix"] floating enable
-# for_window [class="Klipper"] floating enable
-# for_window [class="Plasmoidviewer"] floating enable
-# for_window [class="plasmawindowed"] floating enable
-
-# >>> Window Rules <<<
-
-# >>> Avoid tiling for non-Plasma stuff <<<
-# for_window [window_role="pop-up"] floating enable
-# for_window [window_role="bubble"] floating enable
-# for_window [window_role="task_dialog"] floating enable
-# for_window [window_role="Preferences"] floating enable
-# for_window [window_role="About"] floating enable 
-# for_window [window_type="dialog"] floating enable
-# for_window [window_type="menu"] floating enable
-
-# no_focus [class=”plasmashell”]
-
-#for_window [title="System Tray"] floating enable
-#for_window [title="System Tray" window_type="normal"] move scratchpad
-#bindsym $mod+Shift+s [title="System Tray"] scratchpad show, resize set 10 10, move position center
-#exec --no-startup-id "plasmawindowed org.kde.plasma.systemtray"
-
-#bar {
-#	status_command i3status
-#	colors {
-#		statusline "#777777"
-#	}
-#}
-
 #  ________   ________ _____ 
 # |  ____\ \ / /  ____/ ____|
 # | |__   \ V /| |__ | |     
@@ -324,7 +289,6 @@ exec --no-startup-id nitrogen --restore
 
 # greenclip daemon
 exec --no-startup-id greenclip daemon
-
 
 #set powersavings for display:
 #exec --no-startup-id xset s 480 dpms 600 600 600

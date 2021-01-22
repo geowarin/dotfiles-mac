@@ -6,6 +6,7 @@ secondary = #02c084
 tertiary = #d07ef2
 fourth = #e5c246
 alert = #ed404c
+unfocused = #5f676a
 
 include-directory = ~/.config/polybar/modules/
 
