@@ -16,6 +16,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 # export M2_HOME="$XDG_CONFIG_HOME"/maven/
 
 export EDITOR=code
+#export TERM=kitty
 
 HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTSIZE=10000
@@ -26,8 +27,9 @@ _Z_DATA="$XDG_DATA_HOME"/z/data
 YOURKIT_HOME="$XDG_DATA_HOME"/yjp
 
 if command -v npm >/dev/null 2>&1; then
-    export PATH="$HOME"/bin:`npm config get prefix`/bin:$PATH
+    export PATH="`npm config get prefix`/bin:$PATH"
 fi
+export PATH="$HOME/bin:$PATH"
 
 export LESSOPEN="| $(which highlight) %s --out-format xterm256 --line-numbers --quiet --force --style solarized-dark"
 export LESS=" -R"

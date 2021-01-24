@@ -151,3 +151,5 @@ alias hue-lecture="hueadm group 1 scene=76JN1EzU2Wt9F96"
 alias hue-concentration="hueadm group 1 scene=HrmDgkJsfbTAzCU"
 alias hue-veilleuse="hueadm group 1 scene=JFm5nnTnlFe266Q"
 alias hue-detente="hueadm group 1 scene=M1rd2aGa2qXMmCz"
+
+alias pstree="ps --user $(id -u) f"
