@@ -41,11 +41,11 @@ elif [ "$system_type" = "Linux" ]; then
   pacman -S fzf
 
   # i3
-  pacman -S i3-gaps feh dunst 
-  yay -S polybar picom-ibhagwan-git
+  pacman -S i3-gaps dunst xclip picom
+  yay -S polybar
   yay -S nerd-fonts-jetbrains-mono
 
-  yay -S xclip bitwarden-rofi rofi-greenclip
+  yay -S bitwarden-rofi rofi-greenclip
 
   # zsh stuff
   pamac install highlight hub
@@ -54,17 +54,6 @@ elif [ "$system_type" = "Linux" ]; then
   pamac install tldr ripgrep fd docker openbsd-netcat
 
   # utils - gui
-  pamac install zeal-git bitwarden
-
-  # i3
-  pamac install i3-gaps polybar feh dunst albert
-
-  # rice
-  pamac install xsettingsd
-
-  # gnome-keyring
-
-  # Remove this freakin kscreen hanging i3
-  rm -rf .local/share/kscreen
+  #pamac install zeal-git bitwarden
 fi
 
