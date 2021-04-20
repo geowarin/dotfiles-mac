@@ -24,6 +24,7 @@
 	# Remove branches that have already been merged with master
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	au = "!git add -u"
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
@@ -31,6 +32,14 @@
 	merge = refs/heads/master
 	
 [include]
-path = user
+	path = user
+
 [core]
 	autocrlf = input
+
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+	# https://thoughtbot.com/blog/autosquashing-git-commits
+	autosquash = true

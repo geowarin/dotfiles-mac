@@ -36,18 +36,6 @@ client.urgent           $fourth      $fourth      #000000       $alert     $four
 
 focus_follows_mouse no
 
-# Multimedia Keys:
-
-# volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.config/i3/scripts/changeVolume 2dB+ unmute"
-bindsym XF86AudioLowerVolume exec --no-startup-id "~/.config/i3/scripts/changeVolume 2dB- unmute"
-bindsym XF86AudioMute exec --no-startup-id "~/.config/i3/scripts/changeVolume toggle"
-
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
 # Redirect sound to headphones
 # bindsym $mod+m exec "/usr/local/bin/switch-audio-port"
 # Lock the system
@@ -178,6 +166,27 @@ bindsym $mod+Shift+Control+Right move container to output right
 bindsym $mod+Shift+Control+Left move container to output left
 
 
+# Multimedia Keys:
+
+# volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.config/i3/scripts/changeVolume 2dB+ unmute"
+bindsym XF86AudioLowerVolume exec --no-startup-id "~/.config/i3/scripts/changeVolume 2dB- unmute"
+bindsym XF86AudioMute exec --no-startup-id "~/.config/i3/scripts/changeVolume toggle"
+
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop  
+
+#bindsym XF86AudioMedia exec dunstify XF86AudioMedia 
+#bindsym XF86AudioNext exec dunstify XF86AudioNext 
+#bindsym XF86AudioPause exec dunstify XF86AudioPause 
+#bindsym XF86AudioPlay exec dunstify XF86AudioPlay 
+#bindsym XF86AudioPrev exec dunstify XF86AudioPrev 
+#bindsym XF86AudioRecord exec dunstify XF86AudioRecord 
+#bindsym XF86AudioRewind exec dunstify XF86AudioRewind 
+#bindsym XF86AudioStop  exec dunstify XF86AudioStop  
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -224,6 +233,7 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 
+for_window [class="devilutionx"] move to workspace $ws9
 for_window [title=".*\(Private Browsing\).*"] move to workspace $ws5
 
 #  ________   ________ _____ 
@@ -252,7 +262,7 @@ exec --no-startup-id greenclip daemon
 exec_always --no-startup-id ~/.config/polybar/start.sh
 exec --no-startup-id picom
 
-exec --no-startup-id setxkbmap -layout fr,us -option grp:alt_shift_toggle
+exec --no-startup-id setxkbmap -layout fr,us #-option grp:alt_shift_toggle
 
 
 #   _____ _                _             _   
@@ -283,7 +293,7 @@ bindsym $mod+o exec rofi -show window -line-padding 4 \
 bindsym $mod+Shift+q exec ~/.config/i3/scripts/shutdown_menu -p rofi -c
 
 # bitwaden menu (requires aur/bitwarden-rofi)
-bindsym $mod+Shift+b exec bwmenu
+bindsym $mod+Shift+b exec bwmenu --clear=20
 
 # clipboard (aur/rofi-greenclip)
 bindsym $mod+Shift+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
@@ -291,3 +301,5 @@ bindsym $mod+Shift+v exec rofi -modi "clipboard:greenclip print" -show clipboard
 # https://aduros.com/blog/hacking-i3-window-promoting/
 # requires community/python-i3ipc
 bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/promote-window.py
+
+bindsym $mod+s exec --no-startup-id wmfocus --fill

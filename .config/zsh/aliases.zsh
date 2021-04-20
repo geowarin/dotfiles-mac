@@ -133,7 +133,8 @@ alias retropie="ssh pi@retropie.local"
 alias osmc="ssh osmc@osmc.local"
 
 # Manage configuration quickly to switch contexts between local, dev ad staging.
-alias kcuc='kubectl config use-context'
+alias kcuc='kubect
+l config use-context'
 alias kcsc='kubectl config set-context'
 alias kcdc='kubectl config delete-context'
 alias kccc='kubectl config current-context'
@@ -153,3 +154,5 @@ alias hue-veilleuse="hueadm group 1 scene=JFm5nnTnlFe266Q"
 alias hue-detente="hueadm group 1 scene=M1rd2aGa2qXMmCz"
 
 alias pstree="ps --user $(id -u) f"
+
+alias idea="bgh ${HOME}/bin/idea"
