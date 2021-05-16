@@ -156,3 +156,11 @@ alias hue-detente="hueadm group 1 scene=M1rd2aGa2qXMmCz"
 alias pstree="ps --user $(id -u) f"
 
 alias idea="bgh ${HOME}/bin/idea"
+
+yayfind () {
+	yay -Sl | awk '{print $2($4=="" ? "" : " *")}' | fzf --multi --preview 'yay -Si {1}' | cut -d \" \" -f 1 | xargs -ro yay -S
+}
+alias pacfind="yayfind"
+#alias pacfind="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print $2}")' | xargs -ro yay -S"
+alias pacremove="pacman -Qq | fzf -m --preview "pacman -Qil {}" --layout=reverse  | xargs -ro sudo pacman -Rsn"
+
