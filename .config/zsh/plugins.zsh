@@ -14,10 +14,14 @@ zplug "zsh-users/zsh-history-substring-search"
 
 zplug "lib/key-bindings", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
-zplug "plugins/sublime", from:oh-my-zsh
 
+# Press esc-esc to add sudo to the previous command
 zplug "hcgraf/zsh-sudo"
-zplug "Seinh/git-prune"
+
+# gprune [ -r | --remote | -b | --both ] <branch-name>
+#zplug "Seinh/git-prune"
+
+# visual git - Add: ga | log: glo | diff: gd...
 zplug "wfxr/forgit", defer:1
 zplug "MichaelAquilina/zsh-you-should-use"
 
@@ -29,7 +33,8 @@ zplug "greymd/docker-zsh-completion"
 
 # Prompt
 zplug mafredri/zsh-async, from:github
-zplug "sindresorhus/pure"
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+#zplug "sindresorhus/pure"
 
 # Syntax highlighting needs to be loaded after compinit
 zplug "zsh-users/zsh-syntax-highlighting", defer:2

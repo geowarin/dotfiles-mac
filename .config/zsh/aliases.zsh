@@ -77,10 +77,6 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Merge PDF files
-# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
-
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
@@ -156,9 +152,10 @@ alias hue-detente="hueadm group 1 scene=M1rd2aGa2qXMmCz"
 alias pstree="ps --user $(id -u) f"
 
 alias idea="bgh ${HOME}/bin/idea"
+alias clion="bgh ${HOME}/bin/clion"
 
 yayfind () {
-	yay -Sl | awk '{print $2($4=="" ? "" : " *")}' | fzf --multi --preview 'yay -Si {1}' | cut -d \" \" -f 1 | xargs -ro yay -S
+	yay -Sl | awk '{print $2($4=="" ? "" : " *")}' | fzf --multi --preview 'yay -Si {1}' | cut -d " " -f 2 | xargs -ro yay -S
 }
 alias pacfind="yayfind"
 #alias pacfind="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print $2}")' | xargs -ro yay -S"
