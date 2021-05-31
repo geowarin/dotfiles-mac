@@ -1,0 +1,56 @@
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme 1
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #393939, #393939, #268bd2
+rofi.color-normal: #393939, #ffffff, #393939, #268bd2, #ffffff
+rofi.color-active: #393939, #268bd2, #393939, #268bd2, #205171
+rofi.color-urgent: #393939, #f3843d, #393939, #268bd2, #ffc39c
+
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme 2
+! ------------------------------------------------------------------------------
+!rofi.color-enabled: true
+!rofi.color-window: #cc2f343f, #cc2f343f, #cc2f343f
+!rofi.color-normal: #002f343f, #d8dee8, #002f343f, #002f343f, #e7763a
+!rofi.color-active: #393939, #268bd2, #393939, #268bd2, #205171
+!rofi.color-urgent: #393939, #f3843d, #393939, #268bd2, #ffc39c
+
+! special
+*.foreground:   #ffffff
+*.background:   #000000
+*.cursorColor:  #ffffff
+
+! black
+*.color0:       #303030
+*.color8:       #5f5f5f
+
+! red
+*.color1:       #c03000
+*.color9:       #ff3a78
+
+! green
+*.color2:       #b1d631
+*.color10:      #a6cd07
+
+! yellow
+*.color3:       #fecf35
+*.color11:      #b5c865
+
+! blue
+*.color4:       #426870
+*.color12:      #4a7781
+
+! magenta
+*.color5:       #6d506d
+*.color13:      #ff3b77
+
+! cyan
+*.color6:       #4bb5c1
+*.color14:      #4bb5c1
+
+! white
+*.color7:       #e2e2e5
+*.color15:      #e2e2e5
